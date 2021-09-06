@@ -1,0 +1,34 @@
+@media all and (min-width: 480px) {
+    
+    .wallet form {
+      max-width: 80vh;
+    }
+  }
+
+  .centered {
+    height: 50px; /* Magic here */
+    width: 100vh; /* Magic here */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .marginedEmail {
+      margin: 20px 50px 20px 0px
+  }
+
+.marginedPsw {
+    margin: 20px 22px 20px 0px
+}
+
+.marginedLogin {
+    margin: 20px 20px 20px 0px
+}
+
+.WalletBalance {
+  margin: 20px 20px 20px 20px;
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 120px 150px;
+}

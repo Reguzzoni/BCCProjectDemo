@@ -119,7 +119,7 @@ export default class Wallet extends Component {
 
               <Button className="marginedButton"
               block size="lg" 
-              onClick={() => this.handleClick()}
+              onClick={this.handleClick()}
               type="submit" 
               disabled={!this.validateForm()}>
                 SEND TRANSACTION

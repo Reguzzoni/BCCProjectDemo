@@ -39,6 +39,8 @@ To build dapp for prod:
 
 Deploy the contents of the ./dapp folder
 
+## Run Client
+cd to src/app and run npm start
 
 ## Resources
 

@@ -67,7 +67,6 @@ const SidebarParent = styled.div`
   
   .behind-the-scenes {
     width: 250px;
-    
   }
 `;
 

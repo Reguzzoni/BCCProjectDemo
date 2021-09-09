@@ -1,21 +1,19 @@
-@media all and (min-width: 480px) {
+@media all {
     .Login {
-      padding: 120px 150px;
+      width:100%
     }
   
     .Login form {
       margin: 0 auto;
       max-width: 320px;
     }
+
+    & > div {
+      width: 250px;
+      height: 100vh;
+    }
   }
 
-  .centered {
-    height: 50px; /* Magic here */
-    width: 100vh; /* Magic here */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 
   .marginedEmail {
       margin: 20px 50px 20px 0px

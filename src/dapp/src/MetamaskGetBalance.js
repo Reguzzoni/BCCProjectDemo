@@ -5,7 +5,7 @@ var thisVar;
 
 export default {
     
-    async sendTrx(receiver, valueEth) {
+    async getBalance() {
         thisVar = this;
         this.web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
         console.log("web3 - ", this.web3);
@@ -39,20 +39,18 @@ export default {
             console.log("this.web3 : ", this.web3);
 
             thisVar.web3.eth.getAccounts(function(error, accounts) {
-                var sender = accounts[0];
-                console.log("sender ",sender, " , receiver ", receiver);
+                var account = accounts[0];
+                console.log("account ", account);
     
-                thisVar.web3.eth.sendTransaction({
-                    to:receiver,
-                    from:sender, 
-                    value:thisVar.web3.utils.toWei(valueEth, "ether")}
-                    ,function (err, res){});
+                thisVar.web3.eth.getBalance(account, (error, balance) => {
+                    console.log("balance ", balance);
+                    return balance;
+                    }
+                );
             });
             
         })
         .catch(e => console.log('Failed connection: '+ e));
-        
-        
     },
 
 }

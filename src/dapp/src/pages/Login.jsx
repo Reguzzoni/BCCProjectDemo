@@ -2,20 +2,43 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./login.css";
+import MetamaskService from "../MetamaskService.js";
+import ConnectButton from "../components/ConnectButton";
+
+
 
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  
   function validateForm() {
     return email.length > 0 && password.length > 0;
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  function requestMetamaskConnect() {
+    MetamaskService.connectToMetamask().then(resolve => {
+      console.log("Connet to metamask with success : ", resolve)
+    });
   }
 
+  function handleSubmit(event) {
+    if(event){
+      event.preventDefault();
+      console.log('The link was submited.');
+      requestMetamaskConnect();
+    }
+  }
+
+  function handleClick(e) {
+    console.log("Event e ", e)
+    if(e){
+      e.preventDefault();
+      console.log('The link was clicked.');
+      requestMetamaskConnect();
+    }
+  }
+  
   return (
     <div className="Login">
       <Form onSubmit={handleSubmit}>
@@ -36,7 +59,12 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Button className="marginedButton" block size="lg" type="submit" disabled={!validateForm()}>
+        
+        <Button className="marginedButton"
+         block size="lg" 
+         onClick={handleClick()}
+         type="submit" 
+         disabled={!validateForm()}>
           Login
         </Button>
       </Form>

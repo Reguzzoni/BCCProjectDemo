@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components'
+import MetamaskService from '../MetamaskService';
 
 const BarParent = styled.div`
   
@@ -15,7 +16,7 @@ const BarParent = styled.div`
   margin: 10px 25px;
 `;
 
-const BarItem = styled.div`
+ const BarItem = styled.div`
   padding: 16px 24px;
   transition: all 0.25s ease-in-out;
   background: ${props => props.active ? "#b15b00" : ""};
@@ -37,15 +38,17 @@ const BarItem = styled.div`
   }
 `;
 
+class Nav extends React.Component {
 
-function Nav(props) {
-    return (
-        <BarParent >
-        <div >
-            <h2>BCC Studio - BC Business Network Contract</h2>
-        </div>
-        </BarParent>
-    );
+
+  render() {
+      return (
+          <BarParent >
+            <div >
+                <h2>BCC Studio - BC Business Network Contract</h2>
+            </div>
+          </BarParent>
+      );
+  }
 }
-
 export default Nav;

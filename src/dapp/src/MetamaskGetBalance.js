@@ -12,8 +12,10 @@ export default {
         console.log("window - ", window);
         console.log("window.ethereum - ", window.ethereum);
         console.log("window.web3 - ", window.web3);
-        
-        // Modern DApp Browsers -  it s a new way to connect metamask on web3 cause It's deprecated 
+
+        return new Promise((resolve, reject) => {
+            
+            // Modern DApp Browsers -  it s a new way to connect metamask on web3 cause It's deprecated 
         if (window.ethereum) {
             thisVar.web3 = new Web3(window.ethereum);
             try { 
@@ -42,17 +44,18 @@ export default {
                 var account = accounts[0];
                 console.log("account ", account);
     
-                thisVar.web3.eth.getBalance(account, (error, balance) => {
-                    console.log("balance ", balance);
-                    return balance;
+                thisVar.web3.eth.getBalance(account, (error, balance) => {                
+                    var accountBalanceVarEth = thisVar.web3.utils.fromWei(balance, 'ether');
+                    console.log("balance ", accountBalanceVarEth);
+                    resolve(accountBalanceVarEth);
                     }
                 );
             });
             
         })
         .catch(e => console.log('Failed connection: '+ e));
-    },
-
+    });    
+    }
 }
 
 /*

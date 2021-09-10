@@ -1,16 +1,43 @@
 import React, {Component} from 'react';
-import TrxHistory from '../components/TrxHistory';
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./wallet.scss";
-import WalletBalance from "../components/WalletBalance";
-import { Grid, Typography } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import MetamaskSendTrx from '../MetamaskSendTrx';
 import MetamaskGetBalance from '../MetamaskGetBalance';
+import MetamaskGetTrxHistory from '../MetamaskGetTrxHistory';
 import Button from "react-bootstrap/Button";
-import styled from 'styled-components';
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
+import {AgGridColumn, AgGridReact} from 'ag-grid-react';
+
+import 'ag-grid-community/dist/styles/ag-grid.css';
+import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+
+const columns = [
+  { field: 'ID',
+    headerName: 'ID Transaction', 
+    width: 90 
+  },
+  {
+    field: 'FROM',
+    headerName: 'From',
+    width: 90,
+  },
+  {
+    field: 'TO',
+    headerName: 'To',
+    width: 90,
+  },
+  {
+    field: 'AMOUNT',
+    headerName: 'Amount',
+    type: 'number',
+    width: 90,
+    editable: true,
+  }
+];
 
 export default class Wallet extends Component {
 
@@ -20,24 +47,18 @@ export default class Wallet extends Component {
     this.state = {
       payeeWalletAddress: "",
       amount : "0.0",
-      accountBalance: "XX.XX"
+      accountBalance: "XX.XX",
+      trxHistory: ""/*[
+        { "name1": "id", "name2": "Id" , "name3":"1", "name4":"1", "name5":"1"}
+      ]*/
+      //[{"name1":"0x5618972C79dD7495710E01833D5D615C3825d841","name2":"0x5618972C79dD7495710E01833D5D615C3825d841","name3":"100000000000000000","name4":30,"name5":9268423}]
+      //["", "", "", "", "", ""]
     };
     
-    this.metamaskSendTransaction = this.metamaskSendTransaction.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.handleChangeAmount = this.handleChangeAmount.bind(this);
-    this.handleChangePayer = this.handleChangePayer.bind(this);
-  
-  }
-  
-  metamaskSendTransaction() {  
-    console.log("this.state.payeeWalletAddress ", this.state.payeeWalletAddress)
-    console.log("this.state.amount ", this.state.amount)
+    this.fillTrxHistory();
 
-    MetamaskSendTrx.sendTrx(
-      this.state.payeeWalletAddress, 
-      this.state.amount );  
+    this.handleChangeAmount = this.handleChangeAmount.bind(this);
+    this.handleChangePayee = this.handleChangePayee.bind(this);
   }
   
   validateForm() {
@@ -45,43 +66,49 @@ export default class Wallet extends Component {
     return true;
   }
 
-  handleSubmit(event) {
-    console.log("event try");
-    if(event){
-      event.preventDefault();
-      console.log('The link was submited.');
-      this.metamaskSendTransaction();
-    }
+  fillTrxHistory = async () => {
+    console.log("Event fillTrxHistory ")
+    // reset table
+    var emptyList = [];
+    this.setState({trxHistory : emptyList});
+    // search trx
+    var listTrxHistory = [];
+    var newTrxHistory = await MetamaskGetTrxHistory.getTrxHistory();
+    console.log("newTrxHistory ", newTrxHistory);
+
+    console.log(" listTrxHistory ", JSON.stringify(newTrxHistory));
+
+    this.setState({trxHistory : newTrxHistory});
   }
   
-  handleClick(event) {
-    console.log("Event handleClick ")
+  handleClickSendTrx = async (event) => {
+    console.log("Event handleClickSendTrx ")
     if(event){
       event.preventDefault();
       console.log('The link was clicked.');
-      MetamaskSendTrx.sendTrx(
+      await MetamaskSendTrx.sendTrx(
         this.state.payeeWalletAddress, 
-        this.state.amount ); 
+        this.state.amount 
+      ); 
+      this.fillTrxHistory();
     }
   }
 
-  handleClickRequestBalance (event) {
+  handleClickRequestBalance = async (event) => {
     console.log("Event handleClickRequestBalance ")
     if(event){
       event.preventDefault();
       console.log('The link was clicked.');
-      MetamaskGetBalance.getBalance().then(resolve => {
-        console.log("balance returned is ", resolve)
-        if(resolve) {
-          this.state.accountBalance = resolve;
-        }
-      });
+
+      var accountBalanceVarEth = await MetamaskGetBalance.getBalance();
+      this.setState({accountBalance: accountBalanceVarEth});
+      console.log("balance return is ", this.state.accountBalance);
     }
   }
 
-  handleChangePayer(event) {
+  handleChangePayee(event) {
     if(event) {
-      console.log('The link was changed.');
+      console.log('The Payee is changed.');
       console.log(this);
       this.setState({ payeeWalletAddress: event.currentTarget.value});
     }
@@ -89,12 +116,12 @@ export default class Wallet extends Component {
 
   handleChangeAmount(event) {
     if(event) {
-      console.log('The link was changed.');
+      console.log('The Amount is changed.');
       console.log(this);
       this.setState({ amount: event.currentTarget.value});
     }
   }
-
+  
   render() {
     return <div className="wallet">
         <Grid container alignItems="stretch" spacing={3} style={{ marginBottom: 20 }}>
@@ -122,7 +149,7 @@ export default class Wallet extends Component {
                     </Form.Label>
                     <Col>
                       <Form.Control size="sm" type="text" key="1"
-                      onChange={this.handleChangePayer} />
+                      onChange={this.handleChangePayee} />
                     </Col>
                   </Form.Row>
                   <br />
@@ -148,22 +175,31 @@ export default class Wallet extends Component {
               </Form>
 
               <Button className="marginedButton"
-              block size="lg" 
-              onClick={this.handleClick}
-              type="submit" 
-              disabled={!this.validateForm}>
-                SEND TRANSACTION
-            </Button>
-            
-
+                block size="lg" 
+                onClick={this.handleClickSendTrx}
+                type="submit" 
+                disabled={!this.validateForm}>
+                  SEND TRANSACTION
+              </Button>
             </Grid>
               
             <Grid item xs={6}>
-                <Col>
-                <WalletBalance></WalletBalance>
+                <Col>   
+                  <Form.Group>;
+                    <Form.Row>
+                      <Form.Label column="sm" lg={12} >
+                        Wallet Balance
+                      </Form.Label>
+                      <Col>
+                      <Form.Label column="sm" lg={12}>
+                        {this.state.accountBalance} eth
+                      </Form.Label>
+                      </Col>
+                    </Form.Row>    
+                  </Form.Group>;
                 </Col>
                 <Col>
-                      <Button className="marginedButton"
+                  <Button className="marginedButton"
                         block size="lg" 
                         onClick={this.handleClickRequestBalance}
                         type="submit">
@@ -171,8 +207,23 @@ export default class Wallet extends Component {
                       </Button>
                     </Col>
                     </Grid>
-            <Grid item xs={11}>
-                <TrxHistory></TrxHistory>
+            <Grid item xs={12}>
+              <div>
+                <h2 style={{textAlignVertical: "center",textAlign: "center",}}>Transaction history</h2>
+                <div className="ag-theme-alpine" style={{height: 250}}>
+                  <AgGridReact
+                      rowData={this.state.trxHistory}>
+                      <AgGridColumn field="ID"></AgGridColumn>
+                      <AgGridColumn field="FROM"></AgGridColumn>
+                      <AgGridColumn field="TO"></AgGridColumn>
+                      <AgGridColumn field="AMOUNT"></AgGridColumn>
+                      <AgGridColumn field="TIME"></AgGridColumn>
+                      <AgGridColumn field="GAS"></AgGridColumn>
+                      <AgGridColumn field="BLOCK_NUMBER"></AgGridColumn>
+                      <AgGridColumn field="HASH"></AgGridColumn>
+                  </AgGridReact>
+              </div>
+              </div>;
             </Grid>
             </Grid>
     </div>;     

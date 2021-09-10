@@ -26,8 +26,8 @@ class SearchableContractTable extends React.Component {
           }];
         
             return <div>
-              <h2 style={{textAlignVertical: "center",textAlign: "center",}}>Search Available Contracts</h2>
-              <BootstrapTable keyField='id' style="width:10%" data={ rows } columns={ columns } />
+                <h2 style={{textAlignVertical: "center",textAlign: "center",}}>Search Available Contracts</h2>
+                <BootstrapTable keyField='id' style="width:10%" data={ rows } columns={ columns } />
               </div>
             ;
     }

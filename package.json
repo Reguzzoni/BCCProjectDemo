@@ -43,6 +43,8 @@
   "dependencies": {
     "@truffle/debugger": "^9.1.8",
     "@truffle/hdwallet-provider": "^1.4.3",
+    "ag-grid-community": "^26.0.0",
+    "ag-grid-react": "^26.0.0",
     "js-yaml": "^4.1.0",
     "replace-in-file": "^6.2.0"
   }

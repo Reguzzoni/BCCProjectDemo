@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import styled from 'styled-components'
-import SidebarItems from "./SidebarItems";
 import {Link} from "react-router-dom";
+import SidebarItems from "./SidebarItemsMenu";
 
 function Sidebar(props, {defaultActive,}) {
     const location = props.history.location;
@@ -27,12 +27,11 @@ function Sidebar(props, {defaultActive,}) {
     }, [location])
 
     return (
-        <>
             <SidebarParent>
                 <div style={{position: 'fixed'}}>
                     {
-                        SidebarItems.map((item, index)=> {
-                            return (
+                        SidebarItems.map( (item, index) => {
+                          return (
                                 <Link to={item.route}>
                                     <SidebarItem key={item.name}
                                                  active={index === activeIndex}
@@ -40,14 +39,12 @@ function Sidebar(props, {defaultActive,}) {
                                         <p>{item.name}</p>
                                     </SidebarItem>
                                 </Link>
-                            );
+                        );
                         })
                     }
-
                 </div>
                 <div className="behind-the-scenes"/>
             </SidebarParent>
-        </>
     );
 }
 

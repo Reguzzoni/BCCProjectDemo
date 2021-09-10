@@ -3,10 +3,13 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./login.scss";
 import MetamaskService from "../MetamaskService.js";
+import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 
-export default function Login() {
+export default function Login({ setToken }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
 
   function validateForm() {
     return email.length > 0 && password.length > 0;
@@ -32,6 +35,10 @@ export default function Login() {
       event.preventDefault();
       console.log('The link was clicked.');
       requestMetamaskConnect();
+      const token = "AuthenticatedToken";
+      setToken(token);
+      history.push("/");
+      window.location.reload();
     }
   }
   
@@ -66,4 +73,8 @@ export default function Login() {
       </Form>
     </div>
   );
+}
+
+Login.propTypes = {
+  setToken: PropTypes.func.isRequired
 }

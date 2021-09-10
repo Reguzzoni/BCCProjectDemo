@@ -4,10 +4,6 @@ const SidebarItems = [
         route: '/'
     },
     {
-        name: "Login",
-        route: '/Login'
-    },
-    {
         name: "My Data & Details",
         route: '/DataDetails'
     },
@@ -18,6 +14,10 @@ const SidebarItems = [
     {
         name: "My Wallet",
         route: 'Wallet'
+    },
+    {
+        name: "Logout",
+        route: '/Logout'
     },
 ];
 

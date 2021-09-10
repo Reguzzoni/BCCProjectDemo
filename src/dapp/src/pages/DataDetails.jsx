@@ -5,7 +5,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import MetamaskService from '../MetamaskService.js';
 
 function DataDetails(props) {
-
     return (
             <>
               <Form>

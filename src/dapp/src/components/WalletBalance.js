@@ -18,7 +18,7 @@ class WalletBalance extends React.Component {
               </Form.Label>
               </Col>
           </Form.Row>    
-        </Form.Group>;
+        </Form.Group>
     }
   }
   

@@ -1,11 +1,11 @@
 import React from 'react';
 import Routes from "../routes";
-import Sidebar from "./Sidebar";
+import Sidebar from "./SidebarLogin";
 import styled from 'styled-components'
 import Nav from "./Nav";
 import "./layout.scss";
 
-function Layout(props) {
+function LayoutLogin(props) {
     return (
         <div>
                 <div className="mainWrapper">
@@ -23,7 +23,7 @@ function Layout(props) {
     );
 }
 
-export default Layout;
+export default LayoutLogin;
 
 const SidebarMargin = styled.div` 
   & > div {

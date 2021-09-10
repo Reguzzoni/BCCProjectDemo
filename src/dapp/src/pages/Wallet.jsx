@@ -62,8 +62,8 @@ export default class Wallet extends Component {
   }
   
   validateForm() {
-    //return this.state.payeeWalletAddresslength > 0;
-    return true;
+    return (this.state.payeeWalletAddress.length > 0
+      && this.state.amount.length > 0);
   }
 
   fillTrxHistory = async () => {
@@ -125,13 +125,11 @@ export default class Wallet extends Component {
   render() {
     return <div className="wallet">
         <Grid container alignItems="stretch" spacing={3} style={{ marginBottom: 20 }}>
-        <Grid item sm={12} md={6}>
+        <Grid item sm={12} md={6} style={{borderStyle: "groove ", borderWidth: "thin"}}>
               <Form>
                 <Form.Group>
                   <Form.Row>
-                    <Form.Label column="lg" lg={10}>
-                      Send Money
-                    </Form.Label>
+                    <h3> Send money </h3>
                     </Form.Row>
                   <br />
                   <Form.Row>
@@ -178,25 +176,25 @@ export default class Wallet extends Component {
                 block size="lg" 
                 onClick={this.handleClickSendTrx}
                 type="submit" 
-                disabled={!this.validateForm}>
+                disabled={!this.validateForm()}>
                   SEND TRANSACTION
               </Button>
             </Grid>
               
             <Grid item xs={6}>
                 <Col>   
-                  <Form.Group>;
+                  <Form.Group>
                     <Form.Row>
-                      <Form.Label column="sm" lg={12} >
-                        Wallet Balance
-                      </Form.Label>
+                      <h3> Wallet Balance </h3>
                       <Col>
-                      <Form.Label column="sm" lg={12}>
+                      <Form.Label style={{
+                        fontSize: "40px"
+                        }} column="sm" lg={12}>
                         {this.state.accountBalance} eth
                       </Form.Label>
                       </Col>
                     </Form.Row>    
-                  </Form.Group>;
+                  </Form.Group>
                 </Col>
                 <Col>
                   <Button className="marginedButton"
@@ -209,18 +207,18 @@ export default class Wallet extends Component {
                     </Grid>
             <Grid item xs={12}>
               <div>
-                <h2 style={{textAlignVertical: "center",textAlign: "center",}}>Transaction history</h2>
+                <h3 style={{textAlignVertical: "center",textAlign: "center",}}>Transaction history</h3>
                 <div className="ag-theme-alpine" style={{height: 250}}>
                   <AgGridReact
                       rowData={this.state.trxHistory}>
-                      <AgGridColumn field="ID"></AgGridColumn>
-                      <AgGridColumn field="FROM"></AgGridColumn>
-                      <AgGridColumn field="TO"></AgGridColumn>
-                      <AgGridColumn field="AMOUNT"></AgGridColumn>
-                      <AgGridColumn field="TIME"></AgGridColumn>
-                      <AgGridColumn field="GAS"></AgGridColumn>
-                      <AgGridColumn field="BLOCK_NUMBER"></AgGridColumn>
-                      <AgGridColumn field="HASH"></AgGridColumn>
+                      <AgGridColumn flex={1} field="ID"></AgGridColumn>
+                      <AgGridColumn flex={1} field="FROM"></AgGridColumn>
+                      <AgGridColumn flex={1} field="TO"></AgGridColumn>
+                      <AgGridColumn flex={1} field="AMOUNT"></AgGridColumn>
+                      <AgGridColumn flex={1} field="TIME"></AgGridColumn>
+                      <AgGridColumn flex={1} field="STATUS"></AgGridColumn>
+                      <AgGridColumn flex={1} field="BLOCK_NUMBER"></AgGridColumn>
+                      <AgGridColumn flex={1} field="HASH"></AgGridColumn>
                   </AgGridReact>
               </div>
               </div>;

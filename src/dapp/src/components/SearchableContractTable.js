@@ -1,6 +1,8 @@
 import React from 'react';
-import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
-import BootstrapTable from 'react-bootstrap-table-next';
+import {AgGridColumn, AgGridReact} from 'ag-grid-react';
+
+import 'ag-grid-community/dist/styles/ag-grid.css';
+import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
 class SearchableContractTable extends React.Component {
     render() {
@@ -26,8 +28,18 @@ class SearchableContractTable extends React.Component {
           }];
         
             return <div>
-                <h2 style={{textAlignVertical: "center",textAlign: "center",}}>Search Available Contracts</h2>
-                <BootstrapTable keyField='id' style="width:10%" data={ rows } columns={ columns } />
+                <h3 style={{textAlignVertical: "center",textAlign: "center",}}>Search Available Contracts</h3>
+                <div className="ag-theme-alpine" style={{height: 250}}>
+                  <AgGridReact
+                      rowData={rows}>
+                      <AgGridColumn flex={1} field="SELECT"></AgGridColumn>
+                      <AgGridColumn flex={1} field="NETWORK"></AgGridColumn>
+                      <AgGridColumn flex={1} field="ID"></AgGridColumn>
+                      <AgGridColumn flex={1} field="STATUS"></AgGridColumn>
+                      <AgGridColumn flex={1} field="ROLE"></AgGridColumn>
+                      <AgGridColumn flex={1} field="DETAILS & CONTRACT"></AgGridColumn>
+                  </AgGridReact>
+              </div>
               </div>
             ;
     }

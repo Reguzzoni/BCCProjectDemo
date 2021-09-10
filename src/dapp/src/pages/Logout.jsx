@@ -12,7 +12,7 @@ export default function Logout({ setToken }) {
     if(event){
       const token = "";
       setToken(token);
-      history.push("/login");
+      history.push("/");
     }
   }
   

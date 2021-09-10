@@ -20,7 +20,7 @@ function Routes() {
         <BrowserRouter>
             <Route render={(props)=>(
                 <LayoutLogin {...props}>
-                    <Route path="/login" component={() => <Login setToken={setToken}></Login>}/>
+                    <Route path="/" component={() => <Login setToken={setToken}></Login>}/>
                 </LayoutLogin>
             )}/>
         </BrowserRouter>

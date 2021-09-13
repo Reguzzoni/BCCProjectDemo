@@ -9,15 +9,14 @@ const BarParent = styled.div`
 
   & > div {
     width: 100%;
-    height: 40px;
+    height: 30px;
   }
 
-  margin: 50px 0px;
+  margin: 25px 0px;
 `;
 
 
 class Nav extends React.Component {
-
 
   render() {
       return (

@@ -3,6 +3,7 @@ import Routes from "../routes";
 import Sidebar from "./SidebarMenu";
 import styled from 'styled-components'
 import Nav from "./Nav";
+import NavEthAddress from "./NavEthAddress";
 import "./layout.scss";
 
 function LayoutMenu(props) {
@@ -14,8 +15,9 @@ function LayoutMenu(props) {
                     <SidebarMargin>
                     <div>
                         <Nav/>
+                        <NavEthAddress/>
                         {props.children}
-                    
+
                     </div>
                     </SidebarMargin>
                 </div>

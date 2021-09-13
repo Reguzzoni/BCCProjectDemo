@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./login.scss";
-import MetamaskService from "../MetamaskService.js";
+import MetamaskConnect from "../MetamaskConnect.js";
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 
@@ -15,9 +15,22 @@ export default function Login({ setToken }) {
     return email.length > 0 && password.length > 0;
   }
 
-  function requestMetamaskConnect() {
-    MetamaskService.connectToMetamask().then(resolve => {
-      console.log("Connet to metamask with success : ", resolve)
+  async function requestMetamaskConnect() {
+    
+    MetamaskConnect.connectToMetamask().then((resolve, error) => {
+      if(error) {
+        console.log("error into login ", error);
+      } 
+      else if(resolve) {
+        console.log("Connet to metamask with success : ", resolve)
+        const token = "AuthenticatedToken";
+        setToken(token);
+        history.push("/");
+        window.location.reload();
+      }
+      else {
+        console.log("Check resolve error", resolve, error)
+      }
     });
   }
 
@@ -35,10 +48,6 @@ export default function Login({ setToken }) {
       event.preventDefault();
       console.log('The link was clicked.');
       requestMetamaskConnect();
-      const token = "AuthenticatedToken";
-      setToken(token);
-      history.push("/");
-      window.location.reload();
     }
   }
   
@@ -76,5 +85,5 @@ export default function Login({ setToken }) {
 }
 
 Login.propTypes = {
-  setToken: PropTypes.func.isRequired
+  setToken: PropTypes.func.isRequired,
 }

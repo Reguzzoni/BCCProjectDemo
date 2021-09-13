@@ -1,10 +1,73 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import "bootstrap/dist/css/bootstrap.min.css";
-import MetamaskService from '../MetamaskService.js';
+import Button from "react-bootstrap/Button";
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import JSONContract from "../JSONContract.js";
 
-function DataDetails(props) {
+export default class DataDetails extends Component {  
+
+  constructor (props){
+    super(props);
+    
+    this.state = {
+      dataDetailsJSON : "",
+      businessName : "",
+      businessTaxId : "",
+      country : "",
+      address : "",
+      businessCode : "",
+      emailAddress : "",
+      businessActivity : ""
+    };
+
+    this.contractJSON = new JSONContract();
+    this.reloadJSONDataFile();
+
+    this.reloadJSONDataFile = this.reloadJSONDataFile.bind(this);
+    this.saveJSONDataFile = this.saveJSONDataFile.bind(this);
+  }
+
+  async reloadJSONDataFile() {
+    var getJsonString = await this.contractJSON.getJsonData();
+    console.log("getJsonString : ", getJsonString)
+    try {
+      var jsonObj = JSON.parse(getJsonString)
+      console.log("jsonObj : ", jsonObj)
+
+      this.setState({
+        dataDetailsJSON : jsonObj,
+        businessName : jsonObj.businessName,
+        businessTaxId : jsonObj.businessTaxId,
+        country : jsonObj.country,
+        address : jsonObj.address,
+        businessCode : jsonObj.businessCode,
+        emailAddress : jsonObj.emailAddress,
+        businessActivity : jsonObj.businessActivity
+      });
+    } catch (error) {
+      console.log("error into JSON conversion : ", jsonObj)
+    }
+  }
+  
+  async saveJSONDataFile() {
+    
+    var jsonObj = {
+      businessName : this.state.businessName,
+      businessTaxId : this.state.businessTaxId,
+      country : this.state.country,
+      address : this.state.address,
+      businessCode : this.state.businessCode,
+      emailAddress : this.state.emailAddress,
+      businessActivity : this.state.businessActivity
+    }
+
+    this.setState({dataDetailsJSON:jsonObj});
+    this.contractJSON.setJsonData(jsonObj);
+  }
+
+  render() {
     return (
             <>
               <Form>
@@ -14,7 +77,10 @@ function DataDetails(props) {
                       Business Name
                     </Form.Label>
                     <Col>
-                      <Form.Control size="lg" type="text" />
+                      <Form.Control 
+                        type="text" placeholder="Business Name: Example"
+                         value={this.state.businessName} 
+                         onChange={e => this.setState({ businessName: e.target.value })}/>
                     </Col>
                   </Form.Row>
                   <br />
@@ -23,7 +89,10 @@ function DataDetails(props) {
                       Business Tax ID
                     </Form.Label>
                     <Col>
-                      <Form.Control type="text" />
+                    <Form.Control 
+                        type="text" placeholder="Business Tax ID: Example"
+                         value={this.state.businessTaxId} 
+                         onChange={e => this.setState({ businessTaxId: e.target.value })}/>
                     </Col>
                   </Form.Row>
                   <br />
@@ -32,7 +101,10 @@ function DataDetails(props) {
                       Country
                     </Form.Label>
                     <Col>
-                      <Form.Control size="sm" type="text"  />
+                    <Form.Control 
+                        type="text" placeholder="Country Name: Example"
+                         value={this.state.country} 
+                         onChange={e => this.setState({ country: e.target.value })}/>
                     </Col>
                   </Form.Row>
                   <br />
@@ -41,7 +113,10 @@ function DataDetails(props) {
                       Address
                     </Form.Label>
                     <Col>
-                      <Form.Control size="sm" type="text"  />
+                    <Form.Control 
+                        type="text" placeholder="Address Name: Example"
+                         value={this.state.address} 
+                         onChange={e => this.setState({ address: e.target.value })}/>
                     </Col>
                   </Form.Row>
                   <br />
@@ -50,7 +125,10 @@ function DataDetails(props) {
                       Business Code
                     </Form.Label>
                     <Col>
-                      <Form.Control size="sm" type="text"  />
+                    <Form.Control 
+                        type="text" placeholder="Business Code: Example"
+                         value={this.state.businessCode} 
+                         onChange={e => this.setState({ businessCode: e.target.value })}/>
                     </Col>
                   </Form.Row>
                   <br />
@@ -59,7 +137,10 @@ function DataDetails(props) {
                       E-mail address
                     </Form.Label>
                     <Col>
-                      <Form.Control size="sm" type="text"  />
+                    <Form.Control 
+                        type="text" placeholder="email address: Example"
+                         value={this.state.emailAddress} 
+                         onChange={e => this.setState({ emailAddress: e.target.value })}/>
                     </Col>
                   </Form.Row>
                   <br />
@@ -68,14 +149,21 @@ function DataDetails(props) {
                       Business Activity
                     </Form.Label>
                     <Col>
-                      <Form.Control size="sm" type="text"  />
+                    <Form.Control 
+                        type="text" placeholder="Business Activity: Example"
+                         value={this.state.businessActivity} 
+                         onChange={e => this.setState({ businessActivity: e.target.value })}/>
                     </Col>
                   </Form.Row>
                 </Form.Group>
               </Form>
+              <Button 
+              block size="lg" 
+              onClick={this.saveJSONDataFile}
+              type="submit">
+                Save
+              </Button>
             </>
-          
     );
+  }
 }
-
-export default DataDetails;

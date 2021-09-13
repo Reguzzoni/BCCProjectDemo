@@ -1,0 +1,50 @@
+import Web3 from 'web3';
+
+export default {
+    
+    async connectToMetamask() {
+
+        this.web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
+        console.log("web3 - ", this.web3);
+        console.log("window - ", window);
+        console.log("window.ethereum - ", window.ethereum);
+        console.log("window.web3 - ", window.web3);
+        
+        return new Promise(resolve => {
+            // Modern DApp Browsers -  it s a new way to connect metamask on web3 cause It's deprecated 
+            if (window.ethereum) {
+                this.web3 = new Web3(window.ethereum);
+                try { 
+                    window.ethereum.enable().then(function() {
+                    // User has allowed account access to DApp...
+                });
+                } catch(e) {
+                // User has denied account access to DApp...
+                }
+            }
+            // Legacy DApp Browsers
+            else if (window.web3) {
+                this.web3 = new Web3(this.web3.currentProvider);
+            }
+            // Non-DApp Browsers
+            else {
+                alert('You have to install MetaMask !');
+            }
+
+            // is metamask connected
+            this.web3.eth.net.isListening().then(() => {
+                console.log('is connected')
+
+                // is wallet connected
+                this.web3.eth.getAccounts().then(accountsConnected => {
+                    if(accountsConnected[0]){
+                        console.log("resolve account ", accountsConnected[0])
+                        resolve(accountsConnected[0]);
+                    }
+                });
+            })
+            .catch(e => console.log('Failed connection: '+ e));
+        });
+    },
+
+}

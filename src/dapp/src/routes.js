@@ -10,9 +10,12 @@ import NotFound from "./pages/NotFound";
 import LayoutLogin from "./components/LayoutLogin";
 import LayoutMenu from "./components/LayoutMenu";
 import useToken from './useToken';
+import MetamaskService from './MetamaskService';
 
 function Routes() {
     const { token, setToken } = useToken();
+
+    var service = new MetamaskService();
 
     if(!token) {
         console.log("Token login empty")
@@ -29,6 +32,7 @@ function Routes() {
     console.log("Token login is not empty!!!")
     //<Login setToken={setToken}></Login>
     // else implicito
+
     return (
         <BrowserRouter>
             <Route render={(props)=>(

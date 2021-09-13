@@ -52,7 +52,7 @@ const getInfuraKey = () => {
     return infuraKey;
   } catch(error) {
     console.log("Problem with secret properties, return it manually");
-    return "https://rinkeby.infura.io/v3/b0db3845a70a4077843a286663c8779f";
+    return "";
   }
 }//"fj4jll3k.....";
 //
@@ -66,7 +66,7 @@ const getInfuraKey = () => {
     return mnemonic;
   } catch(error) {
     console.log("Problem with secret properties, return it manually");
-    return "month print actress rocket health bomb length bomb share sketch squeeze bicycle";
+    return "";
   }
 }
 

@@ -1,43 +1,50 @@
 import React from 'react';
 import {AgGridColumn, AgGridReact} from 'ag-grid-react';
+import AssociationContract from '../AssociationContract.js';
+import BtnCellRendererPreviewContract from './BtnCellRendererPreviewContract.js';
+import BtnCellRendererSend from './BtnCellRendererSend.js';
 
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
 class SearchableContractTable extends React.Component {
+
+  constructor (props){
+    super(props);
+    
+    this.state = {
+      dataDetailsJSON : "",
+      rows: ""
+    };
+
+    this.contractAssociation = new AssociationContract();
+    this.reloadJSONDataFile = this.reloadJSONDataFile.bind(this);
+
+    this.reloadJSONDataFile();
+  }
+
+  async reloadJSONDataFile() {
+    this.contractAssociation.getAssociationData().then(data => {
+      console.log("data : " , data);
+      this.setState({rows:data});
+    });
+  }
+
     render() {
-        const rows = [ "", "", "", "", "", ""];
-        const columns = [{
-          dataField: 'name',
-          text: 'Select'
-        }, {
-          dataField: 'name',
-          text: 'Network'
-        }, {
-          dataField: 'id',
-          text: 'ID'
-        }, {
-          dataField: 'boolean',
-          text: 'Status'
-        }, {
-            dataField: 'name',
-            text: 'Role'
-          }, {
-            dataField: 'name',
-            text: 'Details & Contract'
-          }];
-        
             return <div>
                 <h3 style={{textAlignVertical: "center",textAlign: "center",}}>Search Available Contracts</h3>
                 <div className="ag-theme-alpine" style={{height: 250}}>
-                  <AgGridReact
-                      rowData={rows}>
-                      <AgGridColumn flex={1} field="SELECT"></AgGridColumn>
-                      <AgGridColumn flex={1} field="NETWORK"></AgGridColumn>
+                  <AgGridReact 
+                    frameworkComponents={{
+                      btnCellRendererPreviewContract: BtnCellRendererPreviewContract,
+                      btnCellRendererSend : BtnCellRendererSend
+                    }}
+                      rowData={this.state.rows}>
+                      <AgGridColumn flex={1} field="Network" ></AgGridColumn>
                       <AgGridColumn flex={1} field="ID"></AgGridColumn>
-                      <AgGridColumn flex={1} field="STATUS"></AgGridColumn>
-                      <AgGridColumn flex={1} field="ROLE"></AgGridColumn>
-                      <AgGridColumn flex={1} field="DETAILS & CONTRACT"></AgGridColumn>
+                      <AgGridColumn flex={1} field="Status"></AgGridColumn>
+                      <AgGridColumn flex={1} field="Contract" cellRenderer="btnCellRendererPreviewContract"></AgGridColumn>
+                      <AgGridColumn flex={1} field="Subscribe request" cellRenderer="btnCellRendererSend"></AgGridColumn>
                   </AgGridReact>
               </div>
               </div>

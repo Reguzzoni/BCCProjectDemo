@@ -31,20 +31,65 @@ class SearchableContractTable extends React.Component {
   }
 
     render() {
+
+      const gridOptions = {
+        columnDefs: [
+            { 
+              headerName: 'Network', 
+              field: 'Network'
+            },
+            { 
+              headerName: 'ID', 
+              field: 'ID'
+            },
+            { 
+              headerName: 'Status', 
+              field: 'Status'
+            },
+            { 
+              headerName: 'Contract', 
+              field: 'Contract',
+              cellRenderer: "btnCellRendererPreviewContract"
+            },
+            { 
+              headerName: 'Subscribe request', 
+              field: 'Subscribe request',
+              cellRenderer: "btnCellRendererSend"
+            }
+        ],
+    
+        // a default column definition with properties that get applied to every column
+        defaultColDef: {
+            flex:1,
+            // make every column editable
+            editable: false,
+            // make every column use 'text' filter by default
+            //filter: 'agTextColumnFilter',
+            sortable:true,
+            filter:true
+        },
+    
+        // if we had column groups, we could provide default group items here
+        defaultColGroupDef: {},
+    
+        // define a column type (you can define as many as you like)
+        columnTypes: {
+            nonEditableColumn: { editable: false },
+        },
+        
+        frameworkComponents : {
+          btnCellRendererPreviewContract: BtnCellRendererPreviewContract,
+          btnCellRendererSend : BtnCellRendererSend
+        }
+        // other grid options ...
+    }
+
             return <div>
                 <h3 style={{textAlignVertical: "center",textAlign: "center",}}>Search Available Contracts</h3>
                 <div className="ag-theme-alpine" style={{height: 250}}>
                   <AgGridReact 
-                    frameworkComponents={{
-                      btnCellRendererPreviewContract: BtnCellRendererPreviewContract,
-                      btnCellRendererSend : BtnCellRendererSend
-                    }}
-                      rowData={this.state.rows}>
-                      <AgGridColumn flex={1} field="Network" ></AgGridColumn>
-                      <AgGridColumn flex={1} field="ID"></AgGridColumn>
-                      <AgGridColumn flex={1} field="Status"></AgGridColumn>
-                      <AgGridColumn flex={1} field="Contract" cellRenderer="btnCellRendererPreviewContract"></AgGridColumn>
-                      <AgGridColumn flex={1} field="Subscribe request" cellRenderer="btnCellRendererSend"></AgGridColumn>
+                    gridOptions={gridOptions}
+                    rowData={this.state.rows}>
                   </AgGridReact>
               </div>
               </div>

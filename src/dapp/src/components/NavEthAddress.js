@@ -53,7 +53,7 @@ class NavEthAddress extends React.Component {
                   Metamask account connected : 
                 </h4>
                 <h4 style={{
-                    fontSize: "30px",
+                    fontSize: "3vh",
                     margin : "0px 0 7px 20px"
                   }}> {this.state.ethAddress}
                 </h4>

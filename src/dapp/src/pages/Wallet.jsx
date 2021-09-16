@@ -188,7 +188,7 @@ export default class Wallet extends Component {
                       <h3> Wallet Balance </h3>
                       <Col>
                       <Form.Label style={{
-                        fontSize: "40px"
+                        fontSize: "4vh"
                         }} column="sm" lg={12}>
                         {this.state.accountBalance} eth
                       </Form.Label>

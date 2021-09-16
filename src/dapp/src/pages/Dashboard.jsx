@@ -10,7 +10,7 @@ function Dashboard(props) {
                 textAlignVertical: "center",
                 textAlign: "center",
                 color: "rgba(238, 14, 14, 0.767)",
-                fontSize: "50px",
+                fontSize: "5vh",
                 height: "100%",
                 width: "100%",
                 display: "flex",

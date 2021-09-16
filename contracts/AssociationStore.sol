@@ -38,7 +38,7 @@ contract AssociationStore  is usingOraclize {
         mapAssociation[countTotalId].taxId = "VAT no";
         mapAssociation[countTotalId].businessAddress = "Street no area code";
         mapAssociation[countTotalId].businessCode = "Sic code";
-        mapAssociation[countTotalId].adminName = "Admin name pippo";
+        mapAssociation[countTotalId].adminName = "0x390d3F741C69D948F6b96457abBfD561f1261fb6";
         mapAssociation[countTotalId].status = "Valid";
         mapAssociation[countTotalId].details = "Example details";
 
@@ -51,8 +51,8 @@ contract AssociationStore  is usingOraclize {
         mapAssociation[countTotalId].taxId = "VAT no 2";
         mapAssociation[countTotalId].businessAddress = "Street no area code 2";
         mapAssociation[countTotalId].businessCode = "Sic code 2";
-        mapAssociation[countTotalId].adminName = "Admin name pippo 2";
-        mapAssociation[countTotalId].status = "Valid 2";
+        mapAssociation[countTotalId].adminName = "0x030E42A9a18A0dE7207A17c1Fb68e84b9074878c";
+        mapAssociation[countTotalId].status = "Valid";
         mapAssociation[countTotalId].details = "Example details 2";
 
         
@@ -64,8 +64,8 @@ contract AssociationStore  is usingOraclize {
         mapAssociation[countTotalId].taxId = "VAT no 3";
         mapAssociation[countTotalId].businessAddress = "Street no area code 3";
         mapAssociation[countTotalId].businessCode = "Sic code 3";
-        mapAssociation[countTotalId].adminName = "Admin name pippo 3";
-        mapAssociation[countTotalId].status = "Valid 3";
+        mapAssociation[countTotalId].adminName = "0x5618972C79dD7495710E01833D5D615C3825d841";
+        mapAssociation[countTotalId].status = "Valid";
         mapAssociation[countTotalId].details = "Example details 3";
 
 
@@ -77,21 +77,21 @@ contract AssociationStore  is usingOraclize {
         mapAssociation[countTotalId].taxId = "VAT no 4";
         mapAssociation[countTotalId].businessAddress = "Street no area code 4";
         mapAssociation[countTotalId].businessCode = "Sic code 4";
-        mapAssociation[countTotalId].adminName = "Admin name pippo 4";
-        mapAssociation[countTotalId].status = "Valid 4";
-        mapAssociation[countTotalId].details = "Example details 4";
+        mapAssociation[countTotalId].adminName = "0x390d3F741C69D948F6b96457abBfD561f1261fb6";
+        mapAssociation[countTotalId].status = "Valid";
+        mapAssociation[countTotalId].details = "Example details 4 - ";
 
 
         countTotalId = countTotalId + 1;
 
         mapAssociation[countTotalId].id = countTotalId;
         mapAssociation[countTotalId].businessNetworkName = "Network Business E";
-        mapAssociation[countTotalId].businessNetworkId = "1237";
+        mapAssociation[countTotalId].businessNetworkId = "1238";
         mapAssociation[countTotalId].taxId = "VAT no 5";
         mapAssociation[countTotalId].businessAddress = "Street no area code 5";
         mapAssociation[countTotalId].businessCode = "Sic code 5";
-        mapAssociation[countTotalId].adminName = "Admin name pippo 5";
-        mapAssociation[countTotalId].status = "Valid 5";
+        mapAssociation[countTotalId].adminName = "0x030E42A9a18A0dE7207A17c1Fb68e84b9074878c";
+        mapAssociation[countTotalId].status = "Valid";
         mapAssociation[countTotalId].details = "Example details 5";
 
         mapAddressAssociation[0x030E42A9a18A0dE7207A17c1Fb68e84b9074878c].push(1);
@@ -143,6 +143,9 @@ contract AssociationStore  is usingOraclize {
         }
         else if(compareStrings(_propertyInput,"role")) {
             return mapAssociation[_countInput].members[msg.sender].role;
+        }
+        else if(compareStrings(_propertyInput,"id")) {
+            return uint2str(mapAssociation[_countInput].id);
         }
     }
     

@@ -6,11 +6,19 @@ class BtnCellRendererViewContract extends Component {
     constructor(props) {
       super(props);
       this.text = this.props.text;
+      this.clickFunction = this.props.clickFuntion;
+      this.associationId = this.props.associationId;
+
+      console.log("this.associationId ", this.associationId );
+
       this.btnClickedHandler = this.btnClickedHandler.bind(this);
     }
+
     btnClickedHandler() {
-     this.props.clicked(this.props.value);
+     console.log(console.log("clicked correctly with id ", this.associationId));
+     this.clickFunction(this.associationId);
     }
+
     render() {
       return (
         <>

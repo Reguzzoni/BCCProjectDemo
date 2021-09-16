@@ -58,12 +58,12 @@ const SidebarParent = styled.div`
   }
   
   & > div {
-    width: 250px;
+    width: 20vw;
     height: 100vh;
   }
   
   .behind-the-scenes {
-    width: 250px;
+    width: 20vw;
   }
 `;
 

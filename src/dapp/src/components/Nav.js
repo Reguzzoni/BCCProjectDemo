@@ -10,7 +10,7 @@ const BarParent = styled.div`
 
   & > div {
     width: 100%;
-    height: 30px;
+    height: 1%;
   }
 
   margin: 25px 0px;

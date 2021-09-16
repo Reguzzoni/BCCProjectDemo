@@ -166,9 +166,35 @@ export default class NetworkContractDetails extends Component {
                    value={this.state.adminRole}/>
               </Col>
             </Form.Row>
-            <br />            
+            <br />     
           </Form.Group>
         </Form>
+        <Form style={{ marginLeft:"2.5%", 
+          width : "100%"}}>
+        <Form.Group>
+          <Form.Row style={{
+                            display: "flex",
+                            alignItems: 'flex-end',
+                            justifyContent: 'flex-end',
+                            }}>
+              <Button className="marginedButton"
+                        block size="lg" style={{
+                            marginRight: "1%",
+                            marginLeft: "1%",}}>Check Gantt
+              </Button>  
+              <Button className="marginedButton"
+                        block size="lg" style={{
+                            marginRight: "1%",
+                            marginLeft: "1%",}}>Doc Archive
+              </Button>  
+              <Button className="marginedButton"
+                        block size="lg" style={{
+                            marginRight: "1%",
+                            marginLeft: "1%",}}>Network finance
+              </Button>  
+            </Form.Row>
+          </Form.Group>
+          </Form> 
         </Grid>
       </div>
       <Form style={{marginLeft:20, marginRight:20,
@@ -176,19 +202,17 @@ export default class NetworkContractDetails extends Component {
           <Form.Group>
             <Form.Row>
               <Form.Label column="lg" lg={12}>
-                Details
+                Networkd Contract Details
               </Form.Label>
-              <Col>          
-                <TextField
-                  disabled = {true}
-                  id="outlined-multiline-static"
-                  label={this.state.detail}
+              <Col> 
+                <textarea 
                   multiline
                   rows={4}
-                  defaultValue={this.state.detail}
                   variant="outlined"
                   style={{width:"100%"}}
-                />
+                  value={this.state.detail}
+                  disabled={true}
+                ></textarea>
               </Col>
             </Form.Row>
           </Form.Group>

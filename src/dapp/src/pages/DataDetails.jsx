@@ -5,6 +5,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import JSONContract from "../JSONContract.js";
+import { Grid } from "@material-ui/core";
+import TextField from '@material-ui/core/TextField';
 
 export default class DataDetails extends Component {  
 
@@ -70,7 +72,13 @@ export default class DataDetails extends Component {
   render() {
     return (
             <>
-              <Form>
+              <Grid container alignItems="stretch" 
+              spacing={20} 
+              style={{marginLeft:20, marginRight:20, 
+              width : "100%"}}
+              >
+              <Form style = {{ marginRight:"2.5%", 
+                width : "45%"}}>
                 <Form.Group>
                   <Form.Row>
                     <Form.Label column="lg" lg={10}>
@@ -81,18 +89,6 @@ export default class DataDetails extends Component {
                         type="text" placeholder="Business Name: Example"
                          value={this.state.businessName} 
                          onChange={e => this.setState({ businessName: e.target.value })}/>
-                    </Col>
-                  </Form.Row>
-                  <br />
-                  <Form.Row>
-                    <Form.Label column lg={10}>
-                      Business Tax ID
-                    </Form.Label>
-                    <Col>
-                    <Form.Control 
-                        type="text" placeholder="Business Tax ID: Example"
-                         value={this.state.businessTaxId} 
-                         onChange={e => this.setState({ businessTaxId: e.target.value })}/>
                     </Col>
                   </Form.Row>
                   <br />
@@ -110,18 +106,6 @@ export default class DataDetails extends Component {
                   <br />
                   <Form.Row>
                     <Form.Label column="sm" lg={10}>
-                      Address
-                    </Form.Label>
-                    <Col>
-                    <Form.Control 
-                        type="text" placeholder="Address Name: Example"
-                         value={this.state.address} 
-                         onChange={e => this.setState({ address: e.target.value })}/>
-                    </Col>
-                  </Form.Row>
-                  <br />
-                  <Form.Row>
-                    <Form.Label column="sm" lg={10}>
                       Business Code
                     </Form.Label>
                     <Col>
@@ -129,6 +113,35 @@ export default class DataDetails extends Component {
                         type="text" placeholder="Business Code: Example"
                          value={this.state.businessCode} 
                          onChange={e => this.setState({ businessCode: e.target.value })}/>
+                    </Col>
+                  </Form.Row>
+                  
+                </Form.Group>
+              </Form>
+              <Form style={{ marginLeft:"2.5%", 
+                width : "45%"}}>
+                <Form.Group>       
+                  <Form.Row>
+                    <Form.Label column lg={10}>
+                      Business Tax ID
+                    </Form.Label>
+                    <Col>
+                    <Form.Control 
+                        type="text" placeholder="Business Tax ID: Example"
+                         value={this.state.businessTaxId} 
+                         onChange={e => this.setState({ businessTaxId: e.target.value })}/>
+                    </Col>
+                  </Form.Row>
+                  <br />
+                  <Form.Row>
+                    <Form.Label column="sm" lg={10}>
+                      Address
+                    </Form.Label>
+                    <Col>
+                    <Form.Control 
+                        type="text" placeholder="Address Name: Example"
+                         value={this.state.address} 
+                         onChange={e => this.setState({ address: e.target.value })}/>
                     </Col>
                   </Form.Row>
                   <br />
@@ -144,19 +157,30 @@ export default class DataDetails extends Component {
                     </Col>
                   </Form.Row>
                   <br />
+                </Form.Group>
+              </Form>
+              </Grid>
+              <Form style={{marginLeft:20, marginRight:20,
+              }}>
+                <Form.Group>
                   <Form.Row>
-                    <Form.Label column="sm" lg={10}>
-                      Business Activity
+                    <Form.Label column="lg" lg={12}>
+                    Business Activity
                     </Form.Label>
-                    <Col>
-                    <Form.Control 
-                        type="text" placeholder="Business Activity: Example"
-                         value={this.state.businessActivity} 
-                         onChange={e => this.setState({ businessActivity: e.target.value })}/>
+                    <Col>          
+                      <textarea 
+                        multiline
+                        rows={4}
+                        variant="outlined"
+                        style={{width:"100%"}}
+                        onChange={e => this.setState({ businessActivity: e.target.value })}
+                        value={this.state.businessActivity}
+                      ></textarea>
                     </Col>
                   </Form.Row>
                 </Form.Group>
               </Form>
+
               <Button 
               block size="lg" 
               onClick={this.saveJSONDataFile}

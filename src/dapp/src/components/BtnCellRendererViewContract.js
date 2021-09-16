@@ -21,11 +21,14 @@ class BtnCellRendererViewContract extends Component {
 
     render() {
       return (
-        <>
-          <Button onClick={this.btnClickedHandler}>
+        <div btnDiv>
+          <Button onClick={this.btnClickedHandler}
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',}}>
             View
           </Button>
-        </>
+        </div>
       )
     }
   }

@@ -14,7 +14,8 @@ class BtnCellRendererSend extends Component {
     render() {
       return (
         <>
-          <Button onClick={this.btnClickedHandler}>
+          <Button //onClick={this.btnClickedHandler}
+          >
             Send
           </Button>
         </>

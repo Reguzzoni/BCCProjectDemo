@@ -17,7 +17,7 @@ const BarParent = styled.div`
     height: 40px;
   }
 
-  margin: 50px 0px;
+  margin: 0 0px 2%;
 `;
 
 
@@ -49,12 +49,13 @@ class NavEthAddress extends React.Component {
               alignSelf:"flex-end",
               justifyContent: "flex-start", 
               alignItems: "flex-end"}}>
-                <h4>
-                  Metamask account connected : 
+                <h4 style={{
+                    marginRight: "2vw"
+                  }}>
+                  Metamask account connected 
                 </h4>
                 <h4 style={{
                     fontSize: "3vh",
-                    margin : "0px 0 7px 20px"
                   }}> {this.state.ethAddress}
                 </h4>
             </div>

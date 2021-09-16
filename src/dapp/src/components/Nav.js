@@ -24,10 +24,7 @@ class Nav extends React.Component {
           <BarParent >
             <div style={{
               display:"flex",
-              alignSelf:"flex-start",
-              justifyContent: "flex-start", 
-              alignItems: "flex-start",
-              marginBottom: "50px"}}>
+              alignItems: 'center',}}>
                 <img src={logo} alt="Logo" />
                 <h1 style={{ marginLeft: '50px' }}> BCC Studio - BC Business Network Contract</h1>  
             </div>

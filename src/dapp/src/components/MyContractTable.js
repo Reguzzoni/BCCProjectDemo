@@ -100,9 +100,13 @@ class MyContracTable extends React.Component {
             },
             { 
               headerName: 'AssociationId', 
-              field: 'AssociationId'
+              field: 'AssociationId',
+              hide: true
             },
             { 
+              cellStyle: {
+                display: "table-cell"
+              },
               headerName: 'Detail & Contract', 
               field: 'Detail & Contract',
               cellRenderer: "btnCellRendererViewContract",
@@ -125,7 +129,7 @@ class MyContracTable extends React.Component {
             sortable:true,
             filter:true
         },
-    
+
         // if we had column groups, we could provide default group items here
         defaultColGroupDef: {},
     
@@ -158,7 +162,7 @@ class MyContracTable extends React.Component {
                       justifyContent: 'center',
                       alignItems: 'center',
                       width:"100%"}}
-                      onClick={this.handleCloseModal}>Close</Button>
+                      onClick={this.handleCloseModal}>Back</Button>
                     </div>
                   </ReactModal>
               </div>

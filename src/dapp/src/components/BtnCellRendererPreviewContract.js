@@ -14,7 +14,8 @@ class BtnCellRendererPreviewContract extends Component {
     render() {
       return (
         <>
-          <Button onClick={this.btnClickedHandler}>
+          <Button //onClick={this.btnClickedHandler}
+          >
             PreView
           </Button>
         </>

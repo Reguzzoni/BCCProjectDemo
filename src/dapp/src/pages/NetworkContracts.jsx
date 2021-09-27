@@ -4,7 +4,7 @@ import SearchableContractTable from '../components/SearchableContractTable';
 
 
 export default function NetworkContracts() {
-    return <div>
+    return <div className="networkContract">
         <SearchableContractTable></SearchableContractTable>
         <MyContractTable></MyContractTable>
     </div>;

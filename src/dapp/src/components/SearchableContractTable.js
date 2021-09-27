@@ -84,7 +84,7 @@ class SearchableContractTable extends React.Component {
         // other grid options ...
     }
 
-            return <div>
+            return <div className="trxHistory">
                 <h3 style={{textAlignVertical: "center",textAlign: "center",}}>Search Available Contracts</h3>
                 <div className="ag-theme-alpine" style={{height: 250}}>
                   <AgGridReact 

@@ -22,7 +22,7 @@ class TrxHistory extends React.Component {
             text: 'Date'
           }];
         
-            return <div>
+            return <div className="not found">
               <h2 style={{textAlignVertical: "center",textAlign: "center",}}>Transaction history</h2>
               <BootstrapTable keyField='id' style="width:10%" data={ rows } columns={ columns } />
             </div>;

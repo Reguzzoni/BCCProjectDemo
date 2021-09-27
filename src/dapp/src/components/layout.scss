@@ -1,11 +1,19 @@
+.view {
+    width: 100%;
+    height: 100%;
+}
 .mainWrapper {
     display: flex;
     width: 100%;
+    height: 100%;
+}
+.sideBar {
+    width: 100%;
+    height: 100%;
+}
 
-    & > div:last-child {
-        width: 100%;
-        display: flex;
-        height: 100%;
-        align-items: center;
-    }
+.sidebarMargin {
+    margin: 0 3% 3% 3%;
+    width: 100%;
+    height:100%;
 }

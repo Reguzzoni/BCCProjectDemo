@@ -7,29 +7,25 @@ import NavEthAddress from "./NavEthAddress";
 import "./layout.scss";
 
 function LayoutMenu(props) {
+    
     return (
-        <div>
-                <div className="mainWrapper">
-                    <Sidebar history={props.history}/>
-                    
-                    <SidebarMargin>
-                    <div>
+      <div className="view">
+              <div className="mainWrapper">
+                  <Sidebar className="sideBar"
+                   history={props.history}/>
+                  
+                  <div className="sidebarMargin">
+                    <div className="SideMarginChild">
                         <Nav/>
-                        <NavEthAddress/>
+                          <NavEthAddress/>
                         {props.children}
-
+                    
                     </div>
-                    </SidebarMargin>
-                </div>
-        </div>
-    );
+                  </div>
+              </div>
+      </div>
+  );
 }
 
 export default LayoutMenu;
 
-const SidebarMargin = styled.div` 
-  & > div {
-    margin: 0px 50px 0px 50px;
-    width: 100%
-  }
-`;

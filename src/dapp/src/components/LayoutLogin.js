@@ -7,12 +7,13 @@ import "./layout.scss";
 
 function LayoutLogin(props) {
     return (
-        <div>
+        <div className="view">
                 <div className="mainWrapper">
-                    <Sidebar history={props.history}/>
+                    <Sidebar className="sideBar"
+                     history={props.history}/>
                     
-                    <SidebarMargin>
-                    <div>
+                    <SidebarMargin className="sidebarMargin">
+                    <div className="SideMarginChild">
                         <Nav/>
                         {props.children}
                     
@@ -28,6 +29,7 @@ export default LayoutLogin;
 const SidebarMargin = styled.div` 
   & > div {
     margin: 0px 50px 0px 50px;
-    width: 100%
+    width: 100%;
+    height:100%;
   }
 `;

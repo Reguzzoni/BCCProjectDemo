@@ -206,7 +206,7 @@ export default class Wallet extends Component {
                     </Col>
                     </Grid>
             <Grid item xs={12}>
-              <div>
+              <div className="Wallet">
                 <h3 style={{textAlignVertical: "center",textAlign: "center",}}>Transaction history</h3>
                 <div className="ag-theme-alpine" style={{height: 250}}>
                   <AgGridReact

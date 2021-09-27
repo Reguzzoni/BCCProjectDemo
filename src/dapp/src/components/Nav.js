@@ -22,7 +22,9 @@ class Nav extends React.Component {
   render() {
       return (
           <BarParent >
-            <div style={{
+            <div 
+              className = "bar"
+              style={{
               display:"flex",
               alignItems: 'center',}}>
                 <img src={logo} alt="Logo" />

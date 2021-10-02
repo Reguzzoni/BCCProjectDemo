@@ -2,9 +2,7 @@ import React from 'react';
 import styled from 'styled-components'
 import MetamaskGetAddress from '../MetamaskGetAddress';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
-
-import Form from "react-bootstrap/Form";
-import Col from "react-bootstrap/Col";
+import "./nav.scss"
 
 const BarParent = styled.div`
   
@@ -43,12 +41,7 @@ class NavEthAddress extends React.Component {
 
   render() {
       return (
-          <BarParent>
-            <div style={{
-              display:"flex",
-              alignSelf:"flex-end",
-              justifyContent: "flex-start", 
-              alignItems: "flex-end"}}>
+            <div className = "barParentNavEth">
                 <h4 style={{
                     marginRight: "2vw"
                   }}>
@@ -59,7 +52,6 @@ class NavEthAddress extends React.Component {
                   }}> {this.state.ethAddress}
                 </h4>
             </div>
-          </BarParent>
       );
   }
 }

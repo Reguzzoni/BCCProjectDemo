@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import JSONContract from "../JSONContract.js";
 import { Grid } from "@material-ui/core";
-import TextField from '@material-ui/core/TextField';
+import "./dataDetails.scss";
 
 export default class DataDetails extends Component {  
 
@@ -71,123 +71,121 @@ export default class DataDetails extends Component {
 
   render() {
     return (
-            <>
-              <Grid container alignItems="stretch" 
-              spacing={20} 
-              style={{marginLeft:20, marginRight:20, 
-              width : "100%"}}
-              >
-              <Form style = {{ marginRight:"2.5%", 
-                width : "45%"}}>
-                <Form.Group>
-                  <Form.Row>
-                    <Form.Label column="lg" lg={10}>
-                      Business Name
-                    </Form.Label>
-                    <Col>
-                      <Form.Control 
-                        type="text" placeholder="Business Name: Example"
-                         value={this.state.businessName} 
-                         onChange={e => this.setState({ businessName: e.target.value })}/>
-                    </Col>
-                  </Form.Row>
-                  <br />
-                  <Form.Row>
-                    <Form.Label column="sm" lg={10}>
-                      Country
-                    </Form.Label>
-                    <Col>
-                    <Form.Control 
-                        type="text" placeholder="Country Name: Example"
-                         value={this.state.country} 
-                         onChange={e => this.setState({ country: e.target.value })}/>
-                    </Col>
-                  </Form.Row>
-                  <br />
-                  <Form.Row>
-                    <Form.Label column="sm" lg={10}>
-                      Business Code
-                    </Form.Label>
-                    <Col>
-                    <Form.Control 
-                        type="text" placeholder="Business Code: Example"
-                         value={this.state.businessCode} 
-                         onChange={e => this.setState({ businessCode: e.target.value })}/>
-                    </Col>
-                  </Form.Row>
-                  
-                </Form.Group>
-              </Form>
-              <Form style={{ marginLeft:"2.5%", 
-                width : "45%"}}>
-                <Form.Group>       
-                  <Form.Row>
-                    <Form.Label column lg={10}>
-                      Business Tax ID
-                    </Form.Label>
-                    <Col>
-                    <Form.Control 
-                        type="text" placeholder="Business Tax ID: Example"
-                         value={this.state.businessTaxId} 
-                         onChange={e => this.setState({ businessTaxId: e.target.value })}/>
-                    </Col>
-                  </Form.Row>
-                  <br />
-                  <Form.Row>
-                    <Form.Label column="sm" lg={10}>
-                      Address
-                    </Form.Label>
-                    <Col>
-                    <Form.Control 
-                        type="text" placeholder="Address Name: Example"
-                         value={this.state.address} 
-                         onChange={e => this.setState({ address: e.target.value })}/>
-                    </Col>
-                  </Form.Row>
-                  <br />
-                  <Form.Row>
-                    <Form.Label column="sm" lg={10}>
-                      E-mail address
-                    </Form.Label>
-                    <Col>
-                    <Form.Control 
-                        type="text" placeholder="email address: Example"
-                         value={this.state.emailAddress} 
-                         onChange={e => this.setState({ emailAddress: e.target.value })}/>
-                    </Col>
-                  </Form.Row>
-                  <br />
-                </Form.Group>
-              </Form>
-              </Grid>
-              <Form style={{marginLeft:20, marginRight:20,
-              }}>
-                <Form.Group>
-                  <Form.Row>
-                    <Form.Label column="lg" lg={12}>
-                    Business Activity
-                    </Form.Label>
-                    <Col>          
-                      <textarea 
-                        multiline
-                        rows={4}
-                        variant="outlined"
-                        style={{width:"100%"}}
-                        onChange={e => this.setState({ businessActivity: e.target.value })}
-                        value={this.state.businessActivity}
-                      ></textarea>
-                    </Col>
-                  </Form.Row>
-                </Form.Group>
-              </Form>
+      <React.Fragment>
+        <Grid container alignItems="stretch" 
+        spacing={20} 
+        className="grid"
+        >
+        <Form className="form">
+          <Form.Group>
+            <Form.Row>
+              <Form.Label column="lg" lg={10}>
+                Business Name
+              </Form.Label>
+              <Col>
+                <Form.Control 
+                  type="text" placeholder="Business Name: Example"
+                   value={this.state.businessName} 
+                   onChange={e => this.setState({ businessName: e.target.value })}/>
+              </Col>
+            </Form.Row>
+            <br />
+            <Form.Row>
+              <Form.Label column="sm" lg={10}>
+                Country
+              </Form.Label>
+              <Col>
+              <Form.Control 
+                  type="text" placeholder="Country Name: Example"
+                   value={this.state.country} 
+                   onChange={e => this.setState({ country: e.target.value })}/>
+              </Col>
+            </Form.Row>
+            <br />
+            <Form.Row>
+              <Form.Label column="sm" lg={10}>
+                Business Code
+              </Form.Label>
+              <Col>
+              <Form.Control 
+                  type="text" placeholder="Business Code: Example"
+                   value={this.state.businessCode} 
+                   onChange={e => this.setState({ businessCode: e.target.value })}/>
+              </Col>
+            </Form.Row>
+            
+          </Form.Group>
+        </Form>
+        <Form className="form">
+          <Form.Group>       
+            <Form.Row>
+              <Form.Label column lg={10}>
+                Business Tax ID
+              </Form.Label>
+              <Col>
+              <Form.Control 
+                  type="text" placeholder="Business Tax ID: Example"
+                   value={this.state.businessTaxId} 
+                   onChange={e => this.setState({ businessTaxId: e.target.value })}/>
+              </Col>
+            </Form.Row>
+            <br />
+            <Form.Row>
+              <Form.Label column="sm" lg={10}>
+                Address
+              </Form.Label>
+              <Col>
+              <Form.Control 
+                  type="text" placeholder="Address Name: Example"
+                   value={this.state.address} 
+                   onChange={e => this.setState({ address: e.target.value })}/>
+              </Col>
+            </Form.Row>
+            <br />
+            <Form.Row>
+              <Form.Label column="sm" lg={10}>
+                E-mail address
+              </Form.Label>
+              <Col>
+              <Form.Control 
+                  type="text" placeholder="email address: Example"
+                   value={this.state.emailAddress} 
+                   onChange={e => this.setState({ emailAddress: e.target.value })}/>
+              </Col>
+            </Form.Row>
+            <br />
+          </Form.Group>
+        </Form>
+        </Grid>
+        <Form className="formAll">
+          <Form.Group>
+            <Form.Row>
+              <Form.Label column="lg" lg={12}>
+                Business Activity
+              </Form.Label>
+              <Col>          
+                <textarea 
+                  multiline
+                  rows={10}
+                  variant="outlined"
+                  style={{
+                    width:"100%"
+                  }}
+                  onChange={e => this.setState({ businessActivity: e.target.value })}
+                  value={this.state.businessActivity}
+                ></textarea>
+              </Col>
+            </Form.Row>
+          </Form.Group>
+        </Form>
 
-              <Button 
-              block size="lg" 
-              onClick={this.saveJSONDataFile}
-              type="submit">
-                Save
-              </Button>
-            </>
+        <Button 
+        block size="lg" 
+        onClick={this.saveJSONDataFile}
+        type="submit">
+          Save
+        </Button>
+      </React.Fragment>
     );
   }
 }

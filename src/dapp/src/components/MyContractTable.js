@@ -155,15 +155,10 @@ class MyContracTable extends React.Component {
                   <ReactModal 
                     isOpen={this.state.showModal}
                     >
-                    <NetworkContractDetails associationId={this.state.selectedAssociationId}></NetworkContractDetails>
-                    <div style={{width:"100%"}} >
-
-                    <Button style={{
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      width:"100%"}}
-                      onClick={this.handleCloseModal}>Back</Button>
-                    </div>
+                    <NetworkContractDetails 
+                      associationId={this.state.selectedAssociationId}
+                      handleCloseModal={this.handleCloseModal}></NetworkContractDetails>
+                      
                   </ReactModal>
               </div>
               </div>

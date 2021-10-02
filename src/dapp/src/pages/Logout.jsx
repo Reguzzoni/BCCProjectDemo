@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
-import "./login.scss";
+import "./logout.scss";
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 
@@ -18,16 +18,8 @@ export default function Logout({ setToken }) {
   
   return (
     <div className="Logout">
-        <h3 style={{
-                textAlignVertical: "center",
-                textAlign: "center",
-                height: "100%",
-                width: "100%",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                marginTop: 200                
-        }} > Please, press on button "Logout" to return on login Page</h3>
+        <h3 className="h3logout" >
+          Please, press on button "Logout" to return on login Page</h3>
         <Button 
          block size="lg" 
          onClick={handleClick}

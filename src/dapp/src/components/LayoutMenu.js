@@ -15,11 +15,14 @@ function LayoutMenu(props) {
                    history={props.history}/>
                   
                   <div className="sidebarMargin">
-                    <div className="SideMarginChild">
-                        <Nav/>
-                          <NavEthAddress/>
+                  <div className="SideMarginHeader">
+                      <div className="Header">
+                      <Nav/>
+                      <NavEthAddress/>
+                      </div>
+                  </div>
+                  <div className="SideMarginChild">
                         {props.children}
-                    
                     </div>
                   </div>
               </div>

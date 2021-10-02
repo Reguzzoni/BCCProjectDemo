@@ -28,7 +28,7 @@ function Sidebar(props, {defaultActive,}) {
 
     return (
             <SidebarParent>
-                <div style={{position: 'fixed'}}>
+                <div>
                     {
                         SidebarItems.map( (item, index) => {
                           return (
@@ -58,12 +58,11 @@ const SidebarParent = styled.div`
   }
   
   & > div {
-    width: 20vw;
-    height: 100vh;
+    width: 25vh;
   }
   
   .behind-the-scenes {
-    width: 20vw;
+    width: 25vh;
   }
 `;
 

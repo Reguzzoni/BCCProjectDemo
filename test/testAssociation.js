@@ -62,7 +62,7 @@ contract('Contract Tests', async (accounts) => {
         let getCount;
         try {
             console.log("try to getMyCount")
-            getCount = await this.contract.getMyIds({from: "0x5618972C79dD7495710E01833D5D615C3825d841"});
+            getCount = await this.contract.getMyIds({from: "0xdcc52FC934d151fbcafA412b29FA8565A6A98B60"});
             console.log("try to getMyCount - SUCCESS")
         } catch(error) {
             console.log("Error into getMyCount test : ", error);
@@ -82,7 +82,7 @@ contract('Contract Tests', async (accounts) => {
         let role;
         try {
             console.log("try to get role string")
-            role = await this.contract.getPropertyById(5, "role", {from:  "0x5618972C79dD7495710E01833D5D615C3825d841"});
+            role = await this.contract.getPropertyById(1, "role", {from:  "0xdcc52FC934d151fbcafA412b29FA8565A6A98B60"});
             console.log("try to get role string - SUCCESS")
         } catch(error) {
             console.log("Error into get role test : ", error);
@@ -91,4 +91,29 @@ contract('Contract Tests', async (accounts) => {
         console.log("get role ", role);
     });
 
+    
+    it(`mocha get members info test`, async function () {
+
+        this.contract = await AssociationStore.new(
+            {
+                from: owner
+            });
+
+        let memberInfo;
+        try {
+            console.log("try to get members string")
+            memberInfo = await this.contract.getMemberPropertyById(
+                1,
+                1, 
+                "quota",
+                {
+                     from:  "0xdcc52FC934d151fbcafA412b29FA8565A6A98B60"
+                });
+            console.log("try to get members string - SUCCESS")
+        } catch(error) {
+            console.log("Error into get members test : ", error);
+        }
+
+        console.log("get members ", memberInfo);
+    });
 });

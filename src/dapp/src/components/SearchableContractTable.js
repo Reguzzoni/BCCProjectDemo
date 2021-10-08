@@ -7,7 +7,7 @@ import NetworkPreviewContractDetails from '../pages/NetworkPreviewContractDetail
 
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
-import ReactModal from 'react-modal';
+import Dialog from '@material-ui/core/Dialog';
 
 class SearchableContractTable extends React.Component {
 
@@ -85,7 +85,14 @@ class SearchableContractTable extends React.Component {
             { 
               headerName: 'Subscribe request', 
               field: 'Subscribe request',
-              cellRenderer: "btnCellRendererSend"
+              cellRenderer: "btnCellRendererSend",
+              cellRendererParams(params) {
+                return {
+                  associationId : params.data.AssociationId,
+                  Network : params.data.Network,
+                  ID : params.data.ID,
+                }
+              },
             },
             { 
               headerName: 'AssociationId', 
@@ -127,15 +134,20 @@ class SearchableContractTable extends React.Component {
                       gridOptions={gridOptions}
                       rowData={this.state.rows}>
                     </AgGridReact>
-                    <ReactModal 
-                      isOpen={this.state.showModal}
-                      >
+                    
+                    <Dialog  
+                      fullWidth
+                      maxWidth="900px"
+                      open={this.state.showModal}
+                      onClose={this.handleCloseModal}
+                      aria-labelledby="alert-dialog-title"
+                      aria-describedby="alert-dialog-description"
+                    >
                       <NetworkPreviewContractDetails 
-                        associationId={this.state.selectedAssociationId}
-                        handleCloseModal={this.handleCloseModal}>
+                          associationId={this.state.selectedAssociationId}
+                          handleCloseModal={this.handleCloseModal}>
                       </NetworkPreviewContractDetails>
-                        
-                    </ReactModal>
+                    </Dialog>
                 </div>
               </div>
             ;

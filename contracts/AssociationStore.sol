@@ -22,6 +22,8 @@ contract AssociationStore  is usingOraclize {
         uint fondoComune;
         uint countMember;
         mapping(uint => address) membersLookup;
+        string managementEntity;
+        string sharedFund;
     }
 
     struct Member {
@@ -49,12 +51,12 @@ contract AssociationStore  is usingOraclize {
         mapAssociation[countTotalId].taxId = "VAT no";
         mapAssociation[countTotalId].businessAddress = "Street no area code";
         mapAssociation[countTotalId].businessCode = "Sic code";
-        mapAssociation[countTotalId].adminName = addressToString(greco);
+        mapAssociation[countTotalId].adminName = "Sempronio";
         mapAssociation[countTotalId].status = "Valid";
         mapAssociation[countTotalId].details = "Example details";
-        mapAssociation[countTotalId].durataContratto = "8 anni";
-        mapAssociation[countTotalId].fondoComune = 10;
-
+        mapAssociation[countTotalId].durataContratto = "2025/06/30";
+        mapAssociation[countTotalId].managementEntity = "Organo di controllo";
+        mapAssociation[countTotalId].sharedFund = "0x8b77f539EaC4Dc818a42bAA9aA46f3272bf1c087";
 
         countTotalId = countTotalId + 1;
         mapAssociation[countTotalId].id = countTotalId;
@@ -63,30 +65,56 @@ contract AssociationStore  is usingOraclize {
         mapAssociation[countTotalId].taxId = "VAT no 2";
         mapAssociation[countTotalId].businessAddress = "Street no area code 2";
         mapAssociation[countTotalId].businessCode = "Sic code 2";
-        mapAssociation[countTotalId].adminName = addressToString(greco);
+        mapAssociation[countTotalId].adminName = "Caio";
         mapAssociation[countTotalId].status = "Valid";
         mapAssociation[countTotalId].details = "Example details 2";
-        mapAssociation[countTotalId].durataContratto = "5 anni";
-        mapAssociation[countTotalId].fondoComune = 2;
+        mapAssociation[countTotalId].durataContratto = "2030/12/31";
+        mapAssociation[countTotalId].managementEntity = "Organo di controllo";
+        mapAssociation[countTotalId].sharedFund = "0x4A5D8c1e7938D43F3d07d87B8a2444d59276fF01";
 
+        countTotalId = countTotalId + 1;
+        mapAssociation[countTotalId].id = countTotalId;
+        mapAssociation[countTotalId].businessNetworkName = "Network Business C";
+        mapAssociation[countTotalId].businessNetworkId = "1236";
+        mapAssociation[countTotalId].taxId = "VAT no";
+        mapAssociation[countTotalId].businessAddress = "Street no area code";
+        mapAssociation[countTotalId].businessCode = "Sic code";
+        mapAssociation[countTotalId].adminName = "Rossi";
+        mapAssociation[countTotalId].status = "Valid";
+        mapAssociation[countTotalId].details = "Example details";
+        mapAssociation[countTotalId].durataContratto = "2028/05/12";
+        mapAssociation[countTotalId].managementEntity = "Organo di controllo";
+        mapAssociation[countTotalId].sharedFund = "0xDbf3DCb9A72CDa8951694Ca62BA308f42eb035C2";
 
+        countTotalId = countTotalId + 1;
+        mapAssociation[countTotalId].id = countTotalId;
+        mapAssociation[countTotalId].businessNetworkName = "BN I.M.G.";
+        mapAssociation[countTotalId].businessNetworkId = "1237";
+        mapAssociation[countTotalId].taxId = "VAT no";
+        mapAssociation[countTotalId].businessAddress = "Street no area code";
+        mapAssociation[countTotalId].businessCode = "Sic code";
+        mapAssociation[countTotalId].adminName = "Verdi";
+        mapAssociation[countTotalId].status = "Valid";
+        mapAssociation[countTotalId].details = "Example details";
+        mapAssociation[countTotalId].durataContratto = "2035/1/12";
+        mapAssociation[countTotalId].managementEntity = "Organo di controllo";
+        mapAssociation[countTotalId].sharedFund = "0xa09945E5365D8228B6b30A1b248e302b6d86A88a";
         
         mapAssociation[1].countMember=1; 
         mapAssociation[1].membersLookup[mapAssociation[1].countMember] = bianchi;
         mapAssociation[1].members[bianchi].addr = bianchi;
         mapAssociation[1].members[bianchi].role = "member";
-        mapAssociation[1].members[bianchi].quota = 5;
+        mapAssociation[1].members[bianchi].quota = 20000;
         mapAssociation[1].members[bianchi].taxId = 9111;
         mapAssociation[1].members[bianchi].votingRights = "1500 Class B";
         mapAssociation[1].members[bianchi].name = "Bianchi";
-        
         mapAddressAssociation[bianchi].push(1);
 
         mapAssociation[1].countMember=2;    
         mapAssociation[1].membersLookup[mapAssociation[1].countMember] = greco;
         mapAssociation[1].members[greco].addr = greco;
         mapAssociation[1].members[greco].role = "admin";
-        mapAssociation[1].members[greco].quota = 5;
+        mapAssociation[1].members[greco].quota = 40000;
         mapAssociation[1].members[greco].taxId = 9112;
         mapAssociation[1].members[greco].votingRights = "1000 Class A";
         mapAssociation[1].members[greco].name = "Greco";
@@ -96,7 +124,7 @@ contract AssociationStore  is usingOraclize {
         mapAssociation[2].membersLookup[mapAssociation[2].countMember] = esposito;  
         mapAssociation[2].members[esposito].addr = esposito;
         mapAssociation[2].members[esposito].role = "member";
-        mapAssociation[2].members[esposito].quota = 1;
+        mapAssociation[2].members[esposito].quota = 100000;
         mapAssociation[2].members[esposito].taxId = 9113;
         mapAssociation[2].members[esposito].votingRights = "1000 Class C";
         mapAssociation[2].members[esposito].name = "Esposito";
@@ -106,11 +134,43 @@ contract AssociationStore  is usingOraclize {
         mapAssociation[2].membersLookup[mapAssociation[2].countMember] = greco;  
         mapAssociation[2].members[greco].addr = greco;
         mapAssociation[2].members[greco].role = "admin";
-        mapAssociation[2].members[greco].quota = 1;
+        mapAssociation[2].members[greco].quota = 50000;
         mapAssociation[2].members[greco].taxId = 9114;
         mapAssociation[2].members[greco].votingRights = "1000 Class D";
         mapAssociation[2].members[greco].name = "Greco";
         mapAddressAssociation[greco].push(2);
+
+        /**
+        mapAssociation[4].countMember=1;
+        mapAssociation[4].membersLookup[mapAssociation[4].countMember] = esposito;  
+        mapAssociation[4].members[esposito].addr = esposito;
+        mapAssociation[4].members[esposito].role = "member";
+        mapAssociation[4].members[esposito].quota = 100000;
+        mapAssociation[4].members[esposito].taxId = 9113;
+        mapAssociation[4].members[esposito].votingRights = "1000 Class C";
+        mapAssociation[4].members[esposito].name = "Esposito";
+        mapAddressAssociation[esposito].push(4);
+
+        mapAssociation[4].countMember=2; 
+        mapAssociation[4].membersLookup[mapAssociation[4].countMember] = greco;  
+        mapAssociation[4].members[greco].addr = greco;
+        mapAssociation[4].members[greco].role = "admin";
+        mapAssociation[4].members[greco].quota = 50000;
+        mapAssociation[4].members[greco].taxId = 9114;
+        mapAssociation[4].members[greco].votingRights = "1000 Class D";
+        mapAssociation[4].members[greco].name = "Greco";
+        mapAddressAssociation[greco].push(4);
+
+        mapAssociation[4].countMember=3; 
+        mapAssociation[4].membersLookup[mapAssociation[4].countMember] = bianchi;
+        mapAssociation[4].members[bianchi].addr = bianchi;
+        mapAssociation[4].members[bianchi].role = "member";
+        mapAssociation[4].members[bianchi].quota = 20000;
+        mapAssociation[4].members[bianchi].taxId = 9111;
+        mapAssociation[4].members[bianchi].votingRights = "1500 Class B";
+        mapAssociation[4].members[bianchi].name = "Bianchi";
+        mapAddressAssociation[bianchi].push(4);
+        */
     }
 
     function getPropertyById(
@@ -152,7 +212,13 @@ contract AssociationStore  is usingOraclize {
             return mapAssociation[_countInput].durataContratto;
         }
         else if(compareStrings(_propertyInput,"fondoComune")) {
-            return uint2str(mapAssociation[_countInput].fondoComune);
+            return uint2str(getFondoComune(mapAssociation[_countInput].businessNetworkName));
+        }
+        else if(compareStrings(_propertyInput,"managementEntity")) {
+            return mapAssociation[_countInput].managementEntity;
+        }
+        else if(compareStrings(_propertyInput,"sharedFund")) {
+            return mapAssociation[_countInput].sharedFund;
         }
     }
 
@@ -173,14 +239,14 @@ contract AssociationStore  is usingOraclize {
             string memory quota = 
                 strConcat(
                     uint2str(mapAssociation[_associationInput].members[memberAddr].quota),
-                    " € ");
+                    " $ ");
             return
                 strConcat(
                     quota,
                     " ( ",
                     uint2str( 
                         mapAssociation[_associationInput].members[memberAddr].quota * 100 
-                        / mapAssociation[_associationInput].fondoComune),
+                        / getFondoComune(mapAssociation[_associationInput].businessNetworkName)),
                     " % )"
                 );
         }
@@ -264,11 +330,38 @@ contract AssociationStore  is usingOraclize {
                         strConcat(
                             allMemoryInfo, 
                             memberInfo);
-                   
                 }
             }
         }
-
         return allMemoryInfo;
     }
+
+    function getFondoComune(
+        string memory _businessNetworkName) 
+    public view
+    returns (uint _fondoComune) {
+        for (
+            uint countAssociationIdx=1; 
+            countAssociationIdx<=countTotalId;
+            countAssociationIdx++) 
+        {    
+            if(
+                compareStrings(
+                    mapAssociation[countAssociationIdx].businessNetworkName,_businessNetworkName) 
+            ) {
+                
+                for (
+                    uint countMemberIdx=1; 
+                    countMemberIdx<=mapAssociation[countMemberIdx].countMember;
+                    countMemberIdx++
+                ) {
+                    address _addrMember = mapAssociation[countAssociationIdx].membersLookup[countMemberIdx];
+                    Member storage member = mapAssociation[countAssociationIdx].members[_addrMember];
+                    _fondoComune = _fondoComune + member.quota;          
+                }
+            }
+        }
+        return _fondoComune;
+    }
+
 }

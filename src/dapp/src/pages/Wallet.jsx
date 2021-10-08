@@ -48,14 +48,15 @@ export default class Wallet extends Component {
       payeeWalletAddress: "",
       amount : "0.0",
       accountBalance: "XX.XX",
-      trxHistory: ""/*[
-        { "name1": "id", "name2": "Id" , "name3":"1", "name4":"1", "name5":"1"}
-      ]*/
+      trxHistory: [
+        { "ID": "42512", "FROM": "0x2831b64f4306F87931520DEd2f52F122618ED550" , "TO":"0xA62890aaf033f1268ffea22C52A4b7d6245e7886", "AMOUNT":"35.000 $", "TIME":"2021/06/22", "STATUS":"valid", "BLOCK_NUMBER":"32564", "HASH":"0x5600fd479afcb4562db1841037cad16c29df3686f801ea686eb093d80f626e5f"},
+        { "ID": "69412", "FROM": "0x2831b64f4306F87931520DEd2f52F122618ED550" , "TO":"0x8b77f539EaC4Dc818a42bAA9aA46f3272bf1c087", "AMOUNT":"35.000 $", "TIME":"2021/06/28", "STATUS":"valid", "BLOCK_NUMBER":"495613", "HASH":"0xbf1f09cced8d520ff732c327b09df3daafad9593f6fb4e03dd0452155e634a19"}
+      ]
       //[{"name1":"0x5618972C79dD7495710E01833D5D615C3825d841","name2":"0x5618972C79dD7495710E01833D5D615C3825d841","name3":"100000000000000000","name4":30,"name5":9268423}]
       //["", "", "", "", "", ""]
     };
     
-    this.fillTrxHistory();
+    //this.fillTrxHistory();
 
     this.handleChangeAmount = this.handleChangeAmount.bind(this);
     this.handleChangePayee = this.handleChangePayee.bind(this);

@@ -6,7 +6,7 @@
   "name": "react-sidebar",
   "version": "0.1.0",
   "private": true,
-  "homepage": "./",
+  "homepage": ".",
   "dependencies": {
     "@chakra-ui/react": "^1.6.7",
     "@ethersproject/providers": "^5.4.5",
@@ -27,6 +27,7 @@
     "react": "^16.13.1",
     "react-bootstrap": "^1.6.1",
     "react-bootstrap-table-next": "^4.0.3",
+    "react-confirm-alert": "^2.7.0",
     "react-dom": "^16.13.1",
     "react-modal": "^3.14.3",
     "react-native": "^0.65.1",
@@ -40,7 +41,7 @@
   },
   "scripts": {
     "start": "react-scripts --max_old_space_size=8128 start",
-    "build": "react-scripts build",
+    "build": "react-scripts build ",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

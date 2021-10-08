@@ -53,24 +53,26 @@ export default class Contract {
             this.web3.eth.getAccounts().then(accounts => {
                 
                 var acc = accounts[0];
-                console.log("getAssociationMembersData.methods.get ", acc);
-
+                console.log("getAssociationMembersData.methods.get ", acc, associationId);
 
                 var associationStoreVar = new this.web3.eth.Contract(
                     AssociationStore.abi, 
-                    "0xbe6EeF82642AA5048c4820d8b3E8c795c27A2A56");
+                    "0x21f16c8fc16d012D23f9B97253aAEB6C357c9Cd2");
                 
                 associationStoreVar.methods
                     .getCountMembersByAssociationId(associationId).call({ 
                         from: acc
                     })
                     .then(maxValue => {
+                        console.log("maxValue ", maxValue);
                         var resolvedPromisesArray = [];
 
                         for(var countMember = 1; countMember <= maxValue; countMember++) {
+                            console.log("Info member : ", countMember);
                             resolvedPromisesArray.push(this.getAssociationMemberDataById(
                                 associationId, 
-                                countMember))
+                                countMember));
+                            console.log("resolved : ",resolvedPromisesArray);
                         }
 
                         Promise.all(resolvedPromisesArray).then(resultJson => {
@@ -97,7 +99,7 @@ export default class Contract {
 
                 var associationStoreVar = new this.web3.eth.Contract(
                     AssociationStore.abi, 
-                    "0xbe6EeF82642AA5048c4820d8b3E8c795c27A2A56");
+                    "0x21f16c8fc16d012D23f9B97253aAEB6C357c9Cd2");
                 
                 associationStoreVar.methods
                     .getCountTotalId().call({ 
@@ -136,7 +138,7 @@ export default class Contract {
 
                 var associationStoreVar = new this.web3.eth.Contract(
                     AssociationStore.abi, 
-                    "0xbe6EeF82642AA5048c4820d8b3E8c795c27A2A56");
+                    "0x21f16c8fc16d012D23f9B97253aAEB6C357c9Cd2");
                 
                 associationStoreVar.methods
                     .getMyIds().call({ 
@@ -170,14 +172,14 @@ export default class Contract {
             
             this.web3.eth.getAccounts().then(accounts => {
                 var acc = accounts[0];
-                console.log("associationStoreVar.methods.get ", acc);
+                console.log("getAssociationMemberDataById.methods.get ", memberId);
 
                 var associationStoreVar = new this.web3.eth.Contract(
                     AssociationStore.abi, 
-                    "0xbe6EeF82642AA5048c4820d8b3E8c795c27A2A56");
+                    "0x21f16c8fc16d012D23f9B97253aAEB6C357c9Cd2"
+                );
 
-                console.log("this.associationStoreVar ", associationStoreVar);
-
+                console.log("start request address ", memberId);
                 associationStoreVar.methods
                 .getMemberPropertyById(
                     associationid,
@@ -186,7 +188,7 @@ export default class Contract {
                     from: acc
                 })
                 .then(address => {
-
+                    console.log("start request address ", address);
                     associationStoreVar.methods
                     .getMemberPropertyById(
                         associationid,
@@ -196,6 +198,7 @@ export default class Contract {
                     })
                     .then(role => {
                         
+                        console.log("start request role ", role);
                         associationStoreVar.methods
                         .getMemberPropertyById(
                             associationid,
@@ -205,6 +208,7 @@ export default class Contract {
                         })
                         .then(quota => {
 
+                            console.log("start request quota ", quota);
                             associationStoreVar.methods
                             .getMemberPropertyById(
                                 associationid,
@@ -214,6 +218,7 @@ export default class Contract {
                             })
                             .then(votingRights => {
 
+                                console.log("start request votingRights ", votingRights);
                                 associationStoreVar.methods
                                 .getMemberPropertyById(
                                     associationid,
@@ -222,7 +227,8 @@ export default class Contract {
                                     from: acc
                                 })
                                 .then(name => {
-                                    
+
+                                    console.log("start request name ", name);
                                     associationStoreVar.methods
                                     .getMemberPropertyById(
                                         associationid,
@@ -232,6 +238,7 @@ export default class Contract {
                                     })
                                     .then(taxId => {
 
+                                        console.log("start request taxId ", taxId);
                                         var jsonReturn = {
                                             "address" : address,
                                             "Status" : role,
@@ -264,7 +271,7 @@ export default class Contract {
 
                 var associationStoreVar = new this.web3.eth.Contract(
                     AssociationStore.abi, 
-                    "0xbe6EeF82642AA5048c4820d8b3E8c795c27A2A56");
+                    "0x21f16c8fc16d012D23f9B97253aAEB6C357c9Cd2");
 
                 console.log("this.associationStoreVar ", associationStoreVar);
 
@@ -321,7 +328,7 @@ export default class Contract {
 
                 var associationStoreVar = new this.web3.eth.Contract(
                     AssociationStore.abi, 
-                    "0xbe6EeF82642AA5048c4820d8b3E8c795c27A2A56");
+                    "0x21f16c8fc16d012D23f9B97253aAEB6C357c9Cd2");
 
                 console.log("this.associationStoreVar ", associationStoreVar);
 
@@ -385,7 +392,7 @@ export default class Contract {
 
                 var associationStoreVar = new this.web3.eth.Contract(
                     AssociationStore.abi, 
-                    "0xbe6EeF82642AA5048c4820d8b3E8c795c27A2A56");
+                    "0x21f16c8fc16d012D23f9B97253aAEB6C357c9Cd2");
 
                 console.log("this.associationStoreVar ", associationStoreVar);
 
@@ -440,24 +447,48 @@ export default class Contract {
                                                     })
                                                     .then(associationId => {
 
-                                                        var _detail = detail.replace(/\0/g, '').replaceAll("-","\n\r")
-                                                        console.log(`detail before ${detail} vs after ${_detail}`)
-                                                        var jsonReturn = {
-                                                            "businessNetworkName" : businessNetworkName,
-                                                            "taxId" : taxId,
-                                                            "yourRole" : role,
-                                                            "businessNetworkId" : businessNetworkId,
-                                                            "address" : address,
-                                                            "adminRole" : adminRole,
-                                                            "businessCode" : businessCode,
-                                                            "detail" : _detail,
-                                                            "associationId" : associationId,
-                                                            "durataContratto" : durataContratto
-                                                        };
+                                                        associationStoreVar.methods
+                                                        .getPropertyById(id,"managementEntity").call({ 
+                                                            from: acc
+                                                        })
+                                                        .then(managementEntity => {
 
-                                                        console.log("AssociationContract jsonReturn ", jsonReturn )
+                                                            associationStoreVar.methods
+                                                            .getPropertyById(id,"sharedFund").call({ 
+                                                                from: acc
+                                                            })
+                                                            .then(sharedFund => {
 
-                                                        resolve(jsonReturn);
+                                                                associationStoreVar.methods
+                                                                .getPropertyById(id,"fondoComune").call({ 
+                                                                    from: acc
+                                                                })
+                                                                .then(fondoComune => {
+
+                                                                    var _detail = detail.replace(/\0/g, '').replaceAll("-","\n\r")
+                                                                    console.log(`detail before ${detail} vs after ${_detail}`)
+                                                                    var jsonReturn = {
+                                                                        "businessNetworkName" : businessNetworkName,
+                                                                        "taxId" : taxId,
+                                                                        "yourRole" : role,
+                                                                        "businessNetworkId" : businessNetworkId,
+                                                                        "address" : address,
+                                                                        "adminRole" : adminRole.replace(/\0/g, '').replaceAll("-","\n\r"),
+                                                                        "businessCode" : businessCode,
+                                                                        "detail" : _detail,
+                                                                        "associationId" : associationId,
+                                                                        "durataContratto" : durataContratto,
+                                                                        "managementEntity" : managementEntity,
+                                                                        "sharedFund": sharedFund,
+                                                                        "fondoComune": fondoComune
+                                                                    };
+
+                                                                    console.log("AssociationContract jsonReturn ", jsonReturn )
+
+                                                                    resolve(jsonReturn);
+                                                                });
+                                                            });
+                                                        });
                                                     });
                                                 });
                                             });
@@ -467,9 +498,8 @@ export default class Contract {
                             });
                         });
                     });
-                }); 
+                });
             });
         });
-    
     }
 }

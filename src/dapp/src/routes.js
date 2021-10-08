@@ -20,7 +20,7 @@ function Routes() {
     if(!token) {
         console.log("Token login empty")
         return (
-        <BrowserRouter>
+        <BrowserRouter basename='/'>
             <Route render={(props)=>(
                 <LayoutLogin {...props}>
                     <Route path="/" component={() => <Login setToken={setToken}></Login>}/>
@@ -34,7 +34,7 @@ function Routes() {
     // else implicito
 
     return (
-        <BrowserRouter>
+        <BrowserRouter basename='/'>
             <Route render={(props)=>(
                 <LayoutMenu {...props}>
                     <Switch>

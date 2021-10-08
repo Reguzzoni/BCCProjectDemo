@@ -5,13 +5,13 @@ import BtnCellRendererViewContract from './BtnCellRendererViewContract.js';
 import BtnCellRendererCheckBox from './BtnCellRendererCheckBox.js';
 import NetworkContractDetails from '../pages/NetworkContractDetails.jsx';
 import "bootstrap/dist/css/bootstrap.min.css";
-import Button from "react-bootstrap/Button";
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import ReactModal from 'react-modal';
-import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from '@mui/material/Dialog';
 
 const customStyles = {
   content: {
@@ -152,14 +152,19 @@ class MyContracTable extends React.Component {
                       gridOptions={gridOptions}
                       rowData={this.state.rows}>
                   </AgGridReact>
-                  <ReactModal 
-                    isOpen={this.state.showModal}
-                    >
+                  <Dialog 
+                    fullWidth
+                    maxWidth="900px"
+                    open={this.state.showModal}
+                    onClose={(e) => { this.setState({showModal :false}) }}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                  >
                     <NetworkContractDetails 
                       associationId={this.state.selectedAssociationId}
                       handleCloseModal={this.handleCloseModal}></NetworkContractDetails>
                       
-                  </ReactModal>
+                  </Dialog>
               </div>
               </div>
             ;

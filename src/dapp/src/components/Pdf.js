@@ -3,7 +3,7 @@ import { Document, Page,pdfjs } from 'react-pdf';
   
   
 const url = 
-"http://www.africau.edu/images/default/sample.pdf"
+"https://drive.google.com/file/d/1riZodHv4C0O49QfGHWhVJNMqxd2F_-44/view?usp=sharing"
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
   

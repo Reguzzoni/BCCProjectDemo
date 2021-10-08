@@ -10,6 +10,7 @@ import {AgGridColumn, AgGridReact} from 'ag-grid-react';
 import "./networkContractDetails.scss";
 import Gantt from '../resource/Gantt.png'; // Tell webpack this JS file uses this image
 import pdfIcon from '../resource/pdfIcon.png'; // Tell webpack this JS file uses this image
+import Pdf from '../components/Pdf.js';
 
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -41,7 +42,11 @@ export default class NetworkContractDetails extends Component {
       showModalGantt : false,
       showModalDocArchived: false,
       showModalNetworkFinance: false,
-      memberRowData: ""
+      showContrattoRete:false,
+      memberRowData: "",
+      managementEntity: "",
+      sharedFund: "",
+      fondoComune: ""
     };
 
     this.associationContract = new AssociationContract();
@@ -109,7 +114,10 @@ export default class NetworkContractDetails extends Component {
         yourRole : jsonObj.yourRole,
         detail : jsonObj.detail,
         associationId : jsonObj.associationId,
-        durataContratto: jsonObj.durataContratto
+        durataContratto: jsonObj.durataContratto,
+        managementEntity: jsonObj.managementEntity,
+        sharedFund: jsonObj.sharedFund,
+        fondoComune: jsonObj.fondoComune
       });
     } catch (error) {
       console.log("error into JSON conversion : ", jsonObj)
@@ -125,7 +133,7 @@ export default class NetworkContractDetails extends Component {
   render() {
     
     var listPdf = [
-      'Programma di Rete(diritti e obblighi + modalità di realizzazione)',
+      'Programma di Rete',
       'Contratto di rete',
       'Modalità di Adesione (istruzioni)',
       'Regolamento',
@@ -231,37 +239,38 @@ export default class NetworkContractDetails extends Component {
         ID:1234,
         Date: "XX/XX/XXXX",
         Counterpart:"Notary",
-        Amount:"-1,500 €"
+        Amount:"-1,500 $"
       },{
         Operation:"Quota Registration",
         ID:4321,
         Date: "XX/XX/XXXX",
         Counterpart:"Company A",
-        Amount:"+10,000 €"
+        Amount:"+10,000 $"
       },{
         Operation:"Taxes",
         ID:1111,
         Date: "XX/XX/XXXX",
         Counterpart:"Notary",
-        Amount:"-400 €"
+        Amount:"-400 $"
       },{
         Operation:"Quota&A Registration",
         ID:1212,
         Date: "XX/XX/XXXX",
         Counterpart:"Company B",
-        Amount:"+10,000 €"
+        Amount:"+10,000 $"
       },
     ];
 
+    
     return (
       <React.Fragment>
-        <div className="h3Container">
+        <div className="h3Container" style = {{
+          padding: "10px 24px"}}>
         <h3 className="h3NetworkContractDetails"> 
           Network Contract Details
         </h3>
           <div style={{heigth:"100%"}}>
             <Grid container alignItems="stretch" 
-            spacing={20} 
             className="grid"
             >
             <Form className="form">
@@ -315,6 +324,17 @@ export default class NetworkContractDetails extends Component {
                   </Col>
                 </Form.Row>           
                 <br />
+                <Form.Row>
+                  <Form.Label column="sm" lg={10}>
+                    Contract Expiration
+                  </Form.Label>
+                  <Col>
+                  <Form.Control 
+                      type="text"
+                      disabled={true}
+                      value={this.state.durataContratto}/>
+                  </Col>
+                </Form.Row>
               </Form.Group>
             </Form>
             <Form className="form">
@@ -345,7 +365,7 @@ export default class NetworkContractDetails extends Component {
                 <br />
                 <Form.Row>
                   <Form.Label column="sm" lg={10}>
-                    Admin role
+                    Admin Name
                   </Form.Label>
                   <Col>
                   <Form.Control 
@@ -357,13 +377,25 @@ export default class NetworkContractDetails extends Component {
                 <br /> 
                 <Form.Row>
                   <Form.Label column="sm" lg={10}>
-                    Durata contratto
+                    Management Entity
                   </Form.Label>
                   <Col>
                   <Form.Control 
                       type="text"
                       disabled={true}
-                      value={this.state.durataContratto}/>
+                      value={this.state.managementEntity}/>
+                  </Col>
+                </Form.Row>
+                <br /> 
+                <Form.Row>
+                  <Form.Label column="sm" lg={10}>
+                    Shared Fund
+                  </Form.Label>
+                  <Col>
+                  <Form.Control 
+                      type="text"
+                      disabled={true}
+                      value={this.state.sharedFund}/>
                   </Col>
                 </Form.Row>
                 <br />    
@@ -403,29 +435,52 @@ export default class NetworkContractDetails extends Component {
               </Form> 
             </Grid>
           </div>
-        <Form className="formAll">
+          <Form className="formAll">
             <Form.Group>
               <Form.Row>
                 <Form.Label column="lg" lg={12}>
-                  Networkd Contract Details
+                  Network Contract Details
                 </Form.Label>
                 <Col> 
-                <div className="ag-theme-alpine" style={{width:"100%", height: '260px', padding: "16px 24px"}}>
+                <div className="ag-theme-alpine" style={{width:"100%", height: '170px', padding: "16px 24px"}}>
                 <AgGridReact
                     rowData={this.state.memberRowData}
                     gridOptions={gridOptionsMembers}
-                  >
+                >
                 </AgGridReact>
                 </div>
                 </Col>
               </Form.Row>
             </Form.Group>
           </Form>
-          <Button style={{
-            width:"100%"}}
-            onClick={this.props.handleCloseModal}>
-              Back
-          </Button>
+          <div className="botButtonEnd">
+            <Button style={{
+              width:"64%"}}
+              onClick={this.props.handleCloseModal}>
+                Back
+            </Button>
+
+            <Form style={{width:"20%"}}>
+              <Form.Group>
+                <Form.Row>
+                  <Form.Label>
+                    Fund Totals
+                  </Form.Label>
+                  <Form.Control 
+                      disabled={true}
+                      type="text" 
+                      value={this.state.fondoComune}/>
+                </Form.Row> 
+              </Form.Group>
+            </Form> 
+            
+            
+            <Button style={{
+              width:"10%", backgroundColor: "red"}}
+              onClick={this.closeModalNetworkFinance}>
+                Leave Network
+            </Button> 
+          </div>
         </div>
 
         <Dialog
@@ -461,13 +516,18 @@ export default class NetworkContractDetails extends Component {
             </h3>
           </DialogTitle>
           <List sx={{ pt: 0 }}>
-            {listPdf.map((email) => (
-              <ListItem >
+            {listPdf.map((pdf) => (
+              <ListItem onClick={() => {
+                window.open("https://www.dropbox.com/s/yrx6h9lf3czqm6j/CONTRATTO_RETE_ENG.pdf");
+                //this.setState({showContrattoRete : true})
+              }
+              }>
                 <ListItemAvatar>
-                <img src={pdfIcon} alt="pdfIcon" /> 
-                  {email}
+                  <img src={pdfIcon} alt="pdfIcon" /> 
+                  {pdf}
                 </ListItemAvatar>
-                <ListItemText primary={this.email} />
+                <ListItemText primary={this.pdf} />
+                
               </ListItem>
             ))}
           </List>
@@ -500,6 +560,24 @@ export default class NetworkContractDetails extends Component {
           <Button style={{
             width:"100%"}}
             onClick={this.closeModalNetworkFinance}>
+              Back
+          </Button> 
+        </Dialog>
+
+        <Dialog 
+          onClose={() => {this.setState({showContrattoRete : false})}} 
+          open={this.state.showContrattoRete}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description">
+          <DialogTitle>
+            <h3 className="h3NetworkContractDetails"> 
+              CONTRATTO DI RETE
+            </h3>
+          </DialogTitle>
+          <Pdf/>
+          <Button style={{
+            width:"100%"}}
+            onClick={() => {this.setState({showContrattoRete : false})}}>
               Back
           </Button> 
         </Dialog>

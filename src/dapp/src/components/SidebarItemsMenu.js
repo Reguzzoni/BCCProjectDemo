@@ -9,11 +9,15 @@ const SidebarItems = [
     },
     {
         name: "My Network Contracts",
-        route: 'NetworkContracts'
+        route: '/NetworkContracts'
     },
     {
         name: "My Wallet",
         route: 'Wallet'
+    },
+    {
+        name: "Admin",
+        route: '/Admin'
     },
     {
         name: "Logout",

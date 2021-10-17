@@ -116,4 +116,91 @@ contract('Contract Tests', async (accounts) => {
 
         console.log("get members ", memberInfo);
     });
+
+    it(`mocha get members count test`, async function () {
+
+        this.contract = await AssociationStore.new(
+            {
+                from: owner
+            });
+
+        let memberInfo;
+            
+        try {
+            console.log("try to add members")
+            await this.contract.addMemberToAssociation(
+                "0x68a4a9D37f36585197Ad6185194638148A6a2D27",
+                "role",
+                10000,
+                1000,
+                "1",
+                "Tester",
+                1);
+
+            await this.contract.addMemberToAssociation(
+                "0x68a4a9D37f36585197Ad6185194638148A6a2D27",
+                "role",
+                10000,
+                1000,
+                "1",
+                "Tester",
+                1);
+
+            console.log("try to get members count")
+            memberInfo = await this.contract.getCountMembersByAssociationId(
+                1,
+                {
+                     from:  "0xdcc52FC934d151fbcafA412b29FA8565A6A98B60"
+                });
+            console.log("try to get members count - SUCCESS")
+        } catch(error) {
+            console.log("Error into get members count : ", error);
+        }
+
+        console.log("get members count ", memberInfo);
+    });
+
+    it(`mocha get members info test`, async function () {
+
+        this.contract = await AssociationStore.new(
+            {
+                from: owner
+            });
+
+        let memberInfo;
+            
+        try {
+            console.log("try to add members")
+            await this.contract.addMemberToAssociation(
+                "0x68a4a9D37f36585197Ad6185194638148A6a2D27",
+                "role",
+                10000,
+                1000,
+                "1",
+                "Tester",
+                1);
+
+            await this.contract.addMemberToAssociation(
+                "0x68a4a9D37f36585197Ad6185194638148A6a2D27",
+                "role",
+                10000,
+                1000,
+                "1",
+                "Tester",
+                1);
+
+            console.log("try to get members count")
+            memberInfo = await this.contract.getPropertyById(
+                1,
+                "membersInfo",
+                {
+                     from:  "0xdcc52FC934d151fbcafA412b29FA8565A6A98B60"
+                });
+            console.log("try to get members count - SUCCESS")
+        } catch(error) {
+            console.log("Error into get members count : ", error);
+        }
+
+        console.log("get info ", memberInfo);
+    });
 });

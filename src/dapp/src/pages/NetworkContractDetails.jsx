@@ -474,7 +474,6 @@ export default class NetworkContractDetails extends Component {
               </Form.Group>
             </Form> 
             
-            
             <Button style={{
               width:"10%", backgroundColor: "red"}}
               onClick={this.closeModalNetworkFinance}>

@@ -219,6 +219,11 @@ contract AssociationStore  is usingOraclize {
         }
         else if(compareStrings(_propertyInput,"sharedFund")) {
             return mapAssociation[_countInput].sharedFund;
+        } 
+        else if(compareStrings(_propertyInput,"membersInfo")) {
+            return getMembersInformationByBusinessContract(
+                mapAssociation[_countInput].businessNetworkName
+            );
         }
     }
 
@@ -306,7 +311,7 @@ contract AssociationStore  is usingOraclize {
                 
                 for (
                     uint countMemberIdx=1; 
-                    countMemberIdx<=mapAssociation[countMemberIdx].countMember;
+                    countMemberIdx<=mapAssociation[countAssociationIdx].countMember;
                     countMemberIdx++
                 ) {
                     address _addrMember = mapAssociation[countAssociationIdx].membersLookup[countMemberIdx];
@@ -349,10 +354,9 @@ contract AssociationStore  is usingOraclize {
                 compareStrings(
                     mapAssociation[countAssociationIdx].businessNetworkName,_businessNetworkName) 
             ) {
-                
                 for (
                     uint countMemberIdx=1; 
-                    countMemberIdx<=mapAssociation[countMemberIdx].countMember;
+                    countMemberIdx<=mapAssociation[countAssociationIdx].countMember;
                     countMemberIdx++
                 ) {
                     address _addrMember = mapAssociation[countAssociationIdx].membersLookup[countMemberIdx];
@@ -364,4 +368,52 @@ contract AssociationStore  is usingOraclize {
         return _fondoComune;
     }
 
+    function addMemberToAssociation(
+        address addrMember,
+        string memory role,
+        uint quota,
+        uint taxId,
+        string memory votingRight,
+        string memory name,
+        uint8 countAssociation
+    ) public
+    {
+        mapAssociation[countAssociation].countMember=mapAssociation[countAssociation].countMember+1;    
+        mapAssociation[countAssociation].membersLookup[mapAssociation[countAssociation].countMember] = addrMember;
+        mapAssociation[countAssociation].members[addrMember].addr = addrMember;
+        mapAssociation[countAssociation].members[addrMember].role = role;
+        mapAssociation[countAssociation].members[addrMember].quota = quota;
+        mapAssociation[countAssociation].members[addrMember].taxId = taxId;
+        mapAssociation[countAssociation].members[addrMember].votingRights = votingRight;
+        mapAssociation[countAssociation].members[addrMember].name = name;
+        mapAddressAssociation[addrMember].push(countAssociation);
+    }
+
+    function createAssociation(
+        string memory businessNetworkName,
+        string memory businessNetworkId,
+        string memory taxId,
+        string memory businessAddress,
+        string memory businessCode,
+        string memory adminName,
+        string memory status,
+        string memory details,
+        string memory durataContratto,
+        string memory managementEntity,
+        string memory sharedFund
+    ) public {
+        countTotalId = countTotalId + 1;
+        mapAssociation[countTotalId].id = countTotalId;
+        mapAssociation[countTotalId].businessNetworkName = businessNetworkName;
+        mapAssociation[countTotalId].businessNetworkId = businessNetworkId;
+        mapAssociation[countTotalId].taxId = taxId;
+        mapAssociation[countTotalId].businessAddress = businessAddress;
+        mapAssociation[countTotalId].businessCode = businessCode;
+        mapAssociation[countTotalId].adminName = adminName;
+        mapAssociation[countTotalId].status = status;
+        mapAssociation[countTotalId].details = details;
+        mapAssociation[countTotalId].durataContratto = durataContratto;
+        mapAssociation[countTotalId].managementEntity = managementEntity;
+        mapAssociation[countTotalId].sharedFund = sharedFund;
+    }
 }

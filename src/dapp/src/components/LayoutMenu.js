@@ -7,11 +7,12 @@ import NavEthAddress from "./NavEthAddress";
 import "./layout.scss";
 
 function LayoutMenu(props) {
-    
+    console.log("layout menu isAdmin ", props.inputIsAdmin)
     return (
       <div className="view">
               <div className="mainWrapper">
                   <Sidebar className="sideBar"
+                   isAdmin = {props.inputIsAdmin}
                    history={props.history}/>
                   
                   <div className="sidebarMargin">

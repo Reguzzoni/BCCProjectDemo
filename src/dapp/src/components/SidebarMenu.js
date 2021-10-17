@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import SidebarItems from "./SidebarItemsMenu";
 
 function Sidebar(props, {defaultActive,}) {
+    console.log("isAdmin ", props)
     const location = props.history.location;
     const lastActiveIndexString = localStorage.getItem("lastActiveIndex");
     const lastActiveIndex = Number(lastActiveIndexString);
@@ -31,15 +32,30 @@ function Sidebar(props, {defaultActive,}) {
                 <div>
                     {
                         SidebarItems.map( (item, index) => {
-                          return (
+                          if(item.name=="Admin") {
+                            if(props.isAdmin==true) {
+                              return (
+                                    <Link to={item.route}>
+                                        <SidebarItem key={item.name}
+                                                    active={index === activeIndex}
+                                        >
+                                            <p>{item.name}</p>
+                                        </SidebarItem>
+                                    </Link>
+                              );
+                            }
+                           } 
+                           else {
+                              return (
                                 <Link to={item.route}>
                                     <SidebarItem key={item.name}
-                                                 active={index === activeIndex}
+                                                active={index === activeIndex}
                                     >
                                         <p>{item.name}</p>
                                     </SidebarItem>
                                 </Link>
-                        );
+                              );
+                          }
                         })
                     }
                 </div>

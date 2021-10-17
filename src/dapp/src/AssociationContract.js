@@ -47,6 +47,44 @@ export default class Contract {
 
     }
 
+    async addMember(
+        associationId, 
+        addressMember,
+        name,
+        role,
+        quota, 
+        taxId,
+        votingRight) {
+        return new Promise((resolve, error)  => {
+
+            this.web3.eth.getAccounts().then(accounts => {
+                
+                var acc = accounts[0];
+                console.log("getAssociationMembersData.methods.get ", acc, associationId);
+
+                var associationStoreVar = new this.web3.eth.Contract(
+                    AssociationStore.abi, 
+                    "0x887eDd67543A184fAC3E1C42b58342A1985ed9Fc");
+                
+                associationStoreVar.methods
+                    .addMemberToAssociation(
+                        addressMember,
+                        role,
+                        quota,
+                        taxId,
+                        votingRight,
+                        name,
+                        associationId
+                    ).send({ 
+                        from: acc
+                    })
+                    .then(maxValue => {
+                        console.log("Added with result ", maxValue);
+                })
+            })
+        });
+    }
+
     async getAssociationMembersDataByAssociationId(associationId) {
         return new Promise((resolve, error)  => {
 
@@ -57,7 +95,7 @@ export default class Contract {
 
                 var associationStoreVar = new this.web3.eth.Contract(
                     AssociationStore.abi, 
-                    "0x21f16c8fc16d012D23f9B97253aAEB6C357c9Cd2");
+                    "0x887eDd67543A184fAC3E1C42b58342A1985ed9Fc");
                 
                 associationStoreVar.methods
                     .getCountMembersByAssociationId(associationId).call({ 
@@ -99,7 +137,7 @@ export default class Contract {
 
                 var associationStoreVar = new this.web3.eth.Contract(
                     AssociationStore.abi, 
-                    "0x21f16c8fc16d012D23f9B97253aAEB6C357c9Cd2");
+                    "0x887eDd67543A184fAC3E1C42b58342A1985ed9Fc");
                 
                 associationStoreVar.methods
                     .getCountTotalId().call({ 
@@ -138,7 +176,7 @@ export default class Contract {
 
                 var associationStoreVar = new this.web3.eth.Contract(
                     AssociationStore.abi, 
-                    "0x21f16c8fc16d012D23f9B97253aAEB6C357c9Cd2");
+                    "0x887eDd67543A184fAC3E1C42b58342A1985ed9Fc");
                 
                 associationStoreVar.methods
                     .getMyIds().call({ 
@@ -176,7 +214,7 @@ export default class Contract {
 
                 var associationStoreVar = new this.web3.eth.Contract(
                     AssociationStore.abi, 
-                    "0x21f16c8fc16d012D23f9B97253aAEB6C357c9Cd2"
+                    "0x887eDd67543A184fAC3E1C42b58342A1985ed9Fc"
                 );
 
                 console.log("start request address ", memberId);
@@ -271,7 +309,7 @@ export default class Contract {
 
                 var associationStoreVar = new this.web3.eth.Contract(
                     AssociationStore.abi, 
-                    "0x21f16c8fc16d012D23f9B97253aAEB6C357c9Cd2");
+                    "0x887eDd67543A184fAC3E1C42b58342A1985ed9Fc");
 
                 console.log("this.associationStoreVar ", associationStoreVar);
 
@@ -328,7 +366,7 @@ export default class Contract {
 
                 var associationStoreVar = new this.web3.eth.Contract(
                     AssociationStore.abi, 
-                    "0x21f16c8fc16d012D23f9B97253aAEB6C357c9Cd2");
+                    "0x887eDd67543A184fAC3E1C42b58342A1985ed9Fc");
 
                 console.log("this.associationStoreVar ", associationStoreVar);
 
@@ -392,7 +430,7 @@ export default class Contract {
 
                 var associationStoreVar = new this.web3.eth.Contract(
                     AssociationStore.abi, 
-                    "0x21f16c8fc16d012D23f9B97253aAEB6C357c9Cd2");
+                    "0x887eDd67543A184fAC3E1C42b58342A1985ed9Fc");
 
                 console.log("this.associationStoreVar ", associationStoreVar);
 

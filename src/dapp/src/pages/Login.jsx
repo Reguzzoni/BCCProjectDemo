@@ -22,9 +22,13 @@ export default function Login({ setToken }) {
         console.log("error into login ", error);
       } 
       else if(resolve) {
-        console.log("Connet to metamask with success : ", resolve)
-        const token = "AuthenticatedToken";
-        setToken(token);
+        console.log("Connet to metamask with success : ", email)
+        const tokenMember = "AuthenticatedToken";
+        const tokenAdminMocked = "AuthenticatedTokenAdmin";
+        if(email == "admin")
+          setToken(tokenAdminMocked);
+        else 
+          setToken(tokenMember);
         history.push("/");
         window.location.reload();
       }
